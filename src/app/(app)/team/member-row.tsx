@@ -2,12 +2,13 @@
 
 import { useTransition } from "react";
 import { toast } from "sonner";
+import { Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { initials } from "@/lib/utils";
 import { ROLE_LABELS, type Role } from "@/types/database";
-import { updateMemberRoleAction } from "@/actions/team";
+import { updateMemberRoleAction, deleteMemberAction } from "@/actions/team";
 
 interface Member {
   id: string;
@@ -66,6 +67,25 @@ export function MemberRow({
     });
   }
 
+  function removeMember() {
+    if (
+      !confirm(
+        `Delete ${member.full_name} permanently? Their account and anything they created will be removed.`
+      )
+    ) {
+      return;
+    }
+    startTransition(async () => {
+      const result = await deleteMemberAction({ profileId: member.id });
+      if (!result.ok) {
+        toast.error(result.error ?? "Failed to delete member.");
+        return;
+      }
+      toast.success("Member deleted");
+      window.location.reload();
+    });
+  }
+
   return (
     <div className="flex flex-col gap-3 rounded-none border-2 border-foreground px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex min-w-0 items-center gap-3">
@@ -110,6 +130,16 @@ export function MemberRow({
               className="text-xs text-muted-foreground"
             >
               {member.status === "active" ? "Suspend" : "Reactivate"}
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={removeMember}
+              disabled={pending}
+              aria-label={`Delete ${member.full_name}`}
+              className="text-muted-foreground hover:text-destructive"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
             </Button>
           </div>
         ) : null}

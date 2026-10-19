@@ -184,3 +184,17 @@ export async function restoreScriptVersionAction(input: {
     return { ok: false, error: e instanceof Error ? e.message : "Failed to restore version." };
   }
 }
+
+export async function deleteScriptAction(input: { scriptId: string }): Promise<ActionResult> {
+  try {
+    await requireOfficer();
+    const supabase = await createClient();
+    const { error } = await supabase.from("scripts").delete().eq("id", input.scriptId);
+    if (error) return { ok: false, error: error.message };
+    revalidatePath("/scripts");
+    revalidatePath("/dashboard");
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Failed to delete script." };
+  }
+}

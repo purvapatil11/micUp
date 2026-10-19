@@ -278,3 +278,30 @@ export async function updateMemberRoleAction(input: {
     return { ok: false, error: e instanceof Error ? e.message : "Failed to update member." };
   }
 }
+
+export async function deleteMemberAction(input: { profileId: string }): Promise<ActionResult> {
+  try {
+    const actor = await requireOfficer();
+    if (actor.id === input.profileId) {
+      return { ok: false, error: "You cannot delete your own account." };
+    }
+    const admin = createAdminClient();
+
+    const reassignments = await Promise.all([
+      admin.from("team_invites").update({ created_by: actor.id }).eq("created_by", input.profileId),
+      admin.from("events").update({ created_by: actor.id }).eq("created_by", input.profileId),
+      admin.from("scripts").update({ created_by: actor.id }).eq("created_by", input.profileId),
+      admin.from("scripts").update({ updated_by: actor.id }).eq("updated_by", input.profileId),
+      admin.from("script_versions").update({ created_by: actor.id }).eq("created_by", input.profileId),
+    ]);
+    const failed = reassignments.find((r) => r.error);
+    if (failed?.error) return { ok: false, error: failed.error.message };
+
+    const { error } = await admin.auth.admin.deleteUser(input.profileId);
+    if (error) return { ok: false, error: error.message };
+    revalidatePath("/team");
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Failed to delete member." };
+  }
+}

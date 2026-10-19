@@ -20,6 +20,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EventStatusBadge, ScriptStatusBadge } from "@/components/domain-badges";
 import { EmptyState } from "@/components/ui/empty-state";
+import { DeleteEventButton } from "./delete-event-button";
 
 export const metadata = { title: "Event" };
 export const dynamic = "force-dynamic";
@@ -97,11 +98,14 @@ export default async function EventDetailPage({
               </Button>
             )}
             {officer ? (
-              <Button asChild size="sm">
-                <Link href={`/run-of-show?event=${id}`}>
-                  <ListOrdered className="h-4 w-4" /> Run of show
-                </Link>
-              </Button>
+              <>
+                <Button asChild size="sm">
+                  <Link href={`/run-of-show?event=${id}`}>
+                    <ListOrdered className="h-4 w-4" /> Run of show
+                  </Link>
+                </Button>
+                <DeleteEventButton eventId={id} />
+              </>
             ) : null}
           </div>
         }
