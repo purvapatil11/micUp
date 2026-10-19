@@ -114,8 +114,8 @@ export default async function AttendancePage({
       {!officer || !checkedInIds.has(user.id) ? (
         <Card className="mb-6">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-semibold">
-              <Radio className="mr-1.5 inline h-4 w-4 text-muted-foreground" />
+            <CardTitle className="flex items-center gap-1.5 text-sm font-semibold">
+              <Radio className="h-4 w-4 text-muted-foreground" />
               Your check-in
             </CardTitle>
             <CardDescription>
@@ -173,8 +173,8 @@ export default async function AttendancePage({
       {/* Attendance list */}
       <Card className="mb-6">
         <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-semibold">
-            <Users className="mr-1.5 inline h-4 w-4 text-muted-foreground" />
+          <CardTitle className="flex items-center gap-1.5 text-sm font-semibold">
+            <Users className="h-4 w-4 text-muted-foreground" />
             Attendance records
           </CardTitle>
           <span className="text-xs text-muted-foreground">

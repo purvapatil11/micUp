@@ -27,7 +27,7 @@ export function EmptyState({
         className="tf-art pointer-events-none absolute inset-x-0 top-0 h-20 border-b-2 border-foreground"
       />
 
-      <div className="relative">
+      <div className="relative flex flex-col items-center">
         {icon ? (
           <div className="mb-3 flex h-11 w-11 items-center justify-center border-2 border-foreground bg-background text-primary">
             {icon}

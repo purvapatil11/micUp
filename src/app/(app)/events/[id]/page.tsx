@@ -137,8 +137,8 @@ export default async function EventDetailPage({
         {/* Assignments */}
         <Card>
           <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-semibold">
-              <Users className="mr-1.5 inline h-4 w-4 text-muted-foreground" />
+            <CardTitle className="flex items-center gap-1.5 text-sm font-semibold">
+              <Users className="h-4 w-4 text-muted-foreground" />
               Assigned team
             </CardTitle>
           </CardHeader>
@@ -171,8 +171,8 @@ export default async function EventDetailPage({
         {/* Related scripts */}
         <Card>
           <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-semibold">
-              <FileText className="mr-1.5 inline h-4 w-4 text-muted-foreground" />
+            <CardTitle className="flex items-center gap-1.5 text-sm font-semibold">
+              <FileText className="h-4 w-4 text-muted-foreground" />
               Related scripts
             </CardTitle>
           </CardHeader>
@@ -197,8 +197,8 @@ export default async function EventDetailPage({
         {/* Run of show preview */}
         <Card className="lg:col-span-2">
           <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-semibold">
-              <ListOrdered className="mr-1.5 inline h-4 w-4 text-muted-foreground" />
+            <CardTitle className="flex items-center gap-1.5 text-sm font-semibold">
+              <ListOrdered className="h-4 w-4 text-muted-foreground" />
               Run of show
             </CardTitle>
             <Button asChild variant="outline" size="sm">

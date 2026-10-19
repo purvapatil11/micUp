@@ -13,7 +13,6 @@ import { createClient } from "@/lib/supabase/server";
 import { isOfficer, allowedStatusTransitions } from "@/lib/permissions";
 import { formatDate, relativeTime, formatTime } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/page-header";
-import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
 import {
   Card,
