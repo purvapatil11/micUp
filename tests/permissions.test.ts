@@ -27,8 +27,8 @@ describe("role helpers", () => {
   });
 
   it("permission gates all require officer role", () => {
-    const officerRoles = ["anchoring_officer", "deputy_anchoring_officer"];
-    const memberRole = "team_member";
+    const officerRoles = ["anchoring_officer", "deputy_anchoring_officer"] as const;
+    const memberRole = "team_member" as const;
 
     for (const gate of [
       canApproveScripts,
