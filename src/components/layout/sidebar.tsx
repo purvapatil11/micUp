@@ -63,16 +63,14 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
                       className={cn(
                         "group flex items-center gap-2.5 rounded-none px-2 py-1.5 text-sm font-semibold transition-colors duration-100 [transition-timing-function:steps(2)]",
                         active
-                          ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]"
-                          : "text-[hsl(var(--sidebar-foreground))] hover:bg-[hsl(var(--sidebar-accent))] hover:text-[hsl(var(--foreground))]"
+                          ? "bg-primary text-primary-foreground"
+                          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground"
                       )}
                     >
                       <item.icon
                         className={cn(
                           "h-4 w-4 shrink-0",
-                          active
-                            ? "text-[hsl(var(--primary-foreground))]"
-                            : "text-[hsl(var(--muted-foreground))] group-hover:text-[hsl(var(--foreground))]"
+                          active ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
                         )}
                       />
                       <span className="flex-1">{item.label}</span>
@@ -89,8 +87,8 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
       </nav>
 
       <div className="border-t-[3px] border-foreground p-3">
-        <div className="flex items-center gap-2 border-2 border-foreground bg-[hsl(var(--secondary))] px-2.5 py-2 text-xs font-semibold text-[hsl(var(--secondary-foreground))]">
-          <Radio className="h-3.5 w-3.5 text-[hsl(var(--primary))]" />
+        <div className="flex items-center gap-2 border-2 border-foreground bg-secondary px-2.5 py-2 text-xs font-semibold text-secondary-foreground">
+          <Radio className="h-3.5 w-3.5 text-primary" />
           <span>Backstage workspace</span>
         </div>
       </div>
@@ -114,8 +112,8 @@ export function MobileNav() {
             className={cn(
               "flex shrink-0 items-center gap-1.5 rounded-none px-2.5 py-1.5 text-xs font-semibold",
               active
-                ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]"
-                : "text-[hsl(var(--sidebar-foreground))] hover:bg-[hsl(var(--sidebar-accent))] hover:text-[hsl(var(--foreground))]"
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <item.icon className="h-3.5 w-3.5" />
