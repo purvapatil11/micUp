@@ -39,7 +39,7 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
   const pathname = usePathname();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-56 flex-col border-r-[3px] border-foreground bg-sidebar lg:flex">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-56 flex-col border-r-[3px] border-foreground bg-[hsl(var(--sidebar))] lg:flex">
       <div className="flex h-14 items-center border-b-[3px] border-foreground px-4">
         <Link href="/dashboard">
           <MicUpLogo size={38} />
@@ -63,14 +63,16 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
                       className={cn(
                         "group flex items-center gap-2.5 rounded-none px-2 py-1.5 text-sm font-semibold transition-colors duration-100 [transition-timing-function:steps(2)]",
                         active
-                          ? "bg-primary text-primary-foreground"
-                          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground"
+                          ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]"
+                          : "text-[hsl(var(--sidebar-foreground))] hover:bg-[hsl(var(--sidebar-accent))] hover:text-[hsl(var(--foreground))]"
                       )}
                     >
                       <item.icon
                         className={cn(
                           "h-4 w-4 shrink-0",
-                          active ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
+                          active
+                            ? "text-[hsl(var(--primary-foreground))]"
+                            : "text-[hsl(var(--muted-foreground))] group-hover:text-[hsl(var(--foreground))]"
                         )}
                       />
                       <span className="flex-1">{item.label}</span>
@@ -87,8 +89,8 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
       </nav>
 
       <div className="border-t-[3px] border-foreground p-3">
-        <div className="flex items-center gap-2 border-2 border-foreground bg-secondary px-2.5 py-2 text-xs font-semibold text-secondary-foreground">
-          <Radio className="h-3.5 w-3.5 text-primary" />
+        <div className="flex items-center gap-2 border-2 border-foreground bg-[hsl(var(--secondary))] px-2.5 py-2 text-xs font-semibold text-[hsl(var(--secondary-foreground))]">
+          <Radio className="h-3.5 w-3.5 text-[hsl(var(--primary))]" />
           <span>Backstage workspace</span>
         </div>
       </div>
@@ -102,7 +104,7 @@ export function MobileNav() {
   const items = NAV_SECTIONS.flatMap((s) => s.items);
 
   return (
-    <nav className="sticky top-14 z-10 flex gap-1 overflow-x-auto border-b-[3px] border-foreground bg-sidebar px-3 py-2 lg:hidden">
+    <nav className="sticky top-14 z-10 flex gap-1 overflow-x-auto border-b-[3px] border-foreground bg-[hsl(var(--sidebar))] px-3 py-2 lg:hidden">
       {items.map((item) => {
         const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
         return (
@@ -112,8 +114,8 @@ export function MobileNav() {
             className={cn(
               "flex shrink-0 items-center gap-1.5 rounded-none px-2.5 py-1.5 text-xs font-semibold",
               active
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))]"
+                : "text-[hsl(var(--sidebar-foreground))] hover:bg-[hsl(var(--sidebar-accent))] hover:text-[hsl(var(--foreground))]"
             )}
           >
             <item.icon className="h-3.5 w-3.5" />

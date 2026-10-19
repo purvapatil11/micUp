@@ -11,7 +11,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <Sidebar />
       </div>
       <div className="lg:pl-56">
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b-[3px] border-foreground bg-background px-4 print:hidden">
+        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b-[3px] border-foreground bg-[hsl(var(--background))] px-4 print:hidden">
           <div className="flex items-center gap-3 lg:hidden">
             <span className="text-sm font-semibold">MicUp</span>
           </div>
