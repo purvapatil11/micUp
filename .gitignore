@@ -37,6 +37,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local scratch SQL (tracked schema lives in supabase/migrations)
+/clean_auth.sql
+/fix_user.sql
+/setup_supabase.sql
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
