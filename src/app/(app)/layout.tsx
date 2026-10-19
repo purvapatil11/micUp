@@ -11,13 +11,13 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <Sidebar />
       </div>
       <div className="lg:pl-56">
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border bg-background/85 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 print:hidden">
+        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b-[3px] border-foreground bg-background px-4 print:hidden">
           <div className="flex items-center gap-3 lg:hidden">
             <span className="text-sm font-semibold">MicUp</span>
           </div>
           <div className="hidden items-center gap-2 text-sm text-muted-foreground lg:flex">
             <span className="inline-flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden />
+              <span className="h-2 w-2 rounded-none bg-success" aria-hidden />
               Private workspace
             </span>
           </div>

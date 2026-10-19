@@ -7,6 +7,7 @@ import {
   correctAttendanceSchema,
   createEventSchema,
   createAnnouncementSchema,
+  updateProfileSchema,
 } from "@/lib/validation";
 
 describe("createScriptSchema", () => {
@@ -215,6 +216,45 @@ describe("createAnnouncementSchema", () => {
       title: "Test",
       message: "Hello",
       priority: "critical",
+    });
+    expect(result.success).toBe(false);
+  });
+});
+
+describe("updateProfileSchema", () => {
+  it("accepts a valid name with an avatar url", () => {
+    const result = updateProfileSchema.safeParse({
+      fullName: "Ada Lovelace",
+      avatarUrl: "https://example.com/avatar.png",
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("accepts a null avatar url", () => {
+    const result = updateProfileSchema.safeParse({
+      fullName: "Ada Lovelace",
+      avatarUrl: null,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("rejects a name shorter than 2 characters once trimmed", () => {
+    const result = updateProfileSchema.safeParse({ fullName: "  A  " });
+    expect(result.success).toBe(false);
+  });
+
+  it("strips control characters from the name", () => {
+    const result = updateProfileSchema.safeParse({ fullName: "Ada\u0007 Lovelace" });
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.fullName).toBe("Ada Lovelace");
+    }
+  });
+
+  it("rejects an invalid avatar url", () => {
+    const result = updateProfileSchema.safeParse({
+      fullName: "Ada Lovelace",
+      avatarUrl: "not-a-url",
     });
     expect(result.success).toBe(false);
   });

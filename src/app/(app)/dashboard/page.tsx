@@ -197,7 +197,7 @@ export default async function DashboardPage() {
                 <Link
                   key={event.id}
                   href={`/events/${event.id}`}
-                  className="flex items-center justify-between rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                  className="flex items-center justify-between rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium">{event.name}</p>
@@ -230,7 +230,7 @@ export default async function DashboardPage() {
                 <Link
                   key={script.id}
                   href={`/scripts/${script.id}`}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                  className="flex items-center justify-between gap-2 rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium">{script.title}</p>
@@ -265,7 +265,7 @@ export default async function DashboardPage() {
                   <Link
                     key={script.id}
                     href={`/scripts/${script.id}`}
-                    className="block rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                    className="block rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                   >
                     <p className="truncate text-sm font-medium">{script.title}</p>
                     <p className="truncate text-xs text-muted-foreground">
@@ -294,7 +294,7 @@ export default async function DashboardPage() {
                   <Link
                     key={script.id}
                     href={`/scripts/${script.id}`}
-                    className="flex items-center justify-between gap-2 rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                    className="flex items-center justify-between gap-2 rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                   >
                     <p className="truncate text-sm font-medium">{script.title}</p>
                     <span className="shrink-0 text-xs text-muted-foreground">
@@ -323,7 +323,7 @@ export default async function DashboardPage() {
                 <Link
                   key={comment.id}
                   href={`/scripts/${comment.script_id}`}
-                  className="block rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                  className="block rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                 >
                   <p className="line-clamp-1 text-sm">{comment.body}</p>
                   <p className="mt-0.5 truncate text-xs text-muted-foreground">
@@ -350,7 +350,7 @@ export default async function DashboardPage() {
                 <Link
                   key={a.id}
                   href="/announcements"
-                  className="block rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                  className="block rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                 >
                   <div className="flex items-center gap-2">
                     <p className="truncate text-sm font-medium">{a.title}</p>
@@ -386,7 +386,7 @@ export default async function DashboardPage() {
                 <Link
                   key={assignment.id}
                   href={`/events/${assignment.events!.id}`}
-                  className="block rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                  className="block rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                 >
                   <p className="truncate text-sm font-medium">{assignment.events!.name}</p>
                   <p className="truncate text-xs text-muted-foreground">
@@ -416,7 +416,7 @@ export default async function DashboardPage() {
                 <Link
                   key={record.id}
                   href={`/events/${record.event_id}/attendance`}
-                  className="flex items-center justify-between gap-2 rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                  className="flex items-center justify-between gap-2 rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                 >
                   <div className="min-w-0">
                     <p className="truncate text-sm font-medium">

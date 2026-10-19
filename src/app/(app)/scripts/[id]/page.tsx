@@ -92,7 +92,7 @@ export default async function ScriptDetailPage({
       />
 
       {/* Meta bar */}
-      <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 rounded-lg border border-border bg-card/60 px-4 py-3 text-xs text-muted-foreground">
+      <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 rounded-none border-2 border-foreground bg-background px-4 py-3 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <CalendarDays className="h-3.5 w-3.5" />
           {(script as any).events ? (
@@ -140,7 +140,7 @@ export default async function ScriptDetailPage({
             />
           ) : (
             <div className="space-y-4">
-              <p className="rounded-md border border-border bg-secondary/40 px-3 py-2 text-sm text-muted-foreground">
+              <p className="rounded-none border-2 border-foreground bg-secondary px-3 py-2 text-sm text-muted-foreground">
                 You can read this script and join the discussion, but only the
                 Anchoring Officer, a Deputy Anchoring Officer, or an assigned
                 anchor can edit it.

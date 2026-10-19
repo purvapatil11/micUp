@@ -69,7 +69,7 @@ export default async function EventsPage() {
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {upcoming.map((event) => (
               <Link key={event.id} href={`/events/${event.id}`}>
-                <Card className="h-full transition-colors hover:border-primary/40">
+                <Card className="tf-card h-full">
                   <CardContent className="space-y-2 p-4">
                     <div className="flex items-start justify-between gap-2">
                       <h3 className="text-sm font-semibold leading-snug">{event.name}</h3>
@@ -109,7 +109,7 @@ export default async function EventsPage() {
               <Link
                 key={event.id}
                 href={`/events/${event.id}`}
-                className="flex items-center justify-between rounded-lg border border-border/60 px-4 py-2.5 transition-colors hover:border-border hover:bg-secondary/40"
+                className="flex items-center justify-between rounded-none border-2 border-foreground px-4 py-2.5 transition-colors hover:bg-secondary"
               >
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium">{event.name}</p>

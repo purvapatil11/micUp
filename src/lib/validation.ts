@@ -8,7 +8,7 @@ import {
 } from "@/types/database";
 
 /** Strip ASCII control characters and trim — used for all free-text input. */
-const CONTROL_CHARS = /[\\u0000-\\u001F\\u007F]/g;
+const CONTROL_CHARS = /[\u0000-\u001F\u007F]/g;
 
 const safeText = (max: number) =>
   z
@@ -118,12 +118,12 @@ export const createEventSchema = z.object({
   eventDate: z.string().date("Pick a valid date"),
   startTime: z
     .string()
-    .regex(/^\\d{2}:\\d{2}$/)
+    .regex(/^\d{2}:\d{2}$/)
     .nullable()
     .optional(),
   endTime: z
     .string()
-    .regex(/^\\d{2}:\\d{2}$/)
+    .regex(/^\d{2}:\d{2}$/)
     .nullable()
     .optional(),
   venue: optionalText(200),
@@ -165,7 +165,7 @@ export const runOfShowItemSchema = z.object({
   itemId: z.string().uuid().optional().nullable(),
   startTime: z
     .string()
-    .regex(/^\\d{2}:\\d{2}$/)
+    .regex(/^\d{2}:\d{2}$/)
     .nullable()
     .optional(),
   segmentTitle: safeText(160).refine((s) => s.length >= 1, "Segment title is required"),

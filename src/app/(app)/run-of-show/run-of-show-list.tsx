@@ -192,10 +192,10 @@ export function RunOfShowList({
         {items.map((item, idx) => (
           <li
             key={item.id}
-            className="rounded-lg border border-border bg-card/60 p-4 transition-colors hover:border-border"
+            className="tf-card rounded-none border-2 border-foreground bg-background p-4 transition-colors hover:bg-secondary"
           >
             <div className="flex items-start gap-3">
-              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-secondary text-xs font-bold">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-none border-2 border-foreground bg-secondary text-xs font-bold">
                 {item.sequence}
               </span>
               <div className="min-w-0 flex-1">
@@ -225,7 +225,7 @@ export function RunOfShowList({
                   <p className="mt-1 text-sm text-muted-foreground">{item.description}</p>
                 ) : null}
                 {item.stage_cue ? (
-                  <p className="mt-2 rounded-md border-l-2 border-stage-cue bg-stage-cue/10 px-3 py-1.5 text-xs text-stage-cue">
+                  <p className="mt-2 rounded-none border-2 border-l-4 border-stage-cue bg-stage-cue/10 px-3 py-1.5 text-xs text-stage-cue">
                     <span className="font-semibold">Stage cue:</span> {item.stage_cue}
                   </p>
                 ) : null}
@@ -240,7 +240,7 @@ export function RunOfShowList({
                     type="button"
                     onClick={() => moveItem(idx, -1)}
                     disabled={idx === 0 || pending}
-                    className="rounded p-1 text-muted-foreground hover:bg-secondary disabled:opacity-30"
+                    className="rounded-none p-1 text-muted-foreground hover:bg-secondary disabled:opacity-30"
                     aria-label="Move up"
                   >
                     <ChevronUp className="h-3.5 w-3.5" />
@@ -249,7 +249,7 @@ export function RunOfShowList({
                     type="button"
                     onClick={() => moveItem(idx, 1)}
                     disabled={idx === items.length - 1 || pending}
-                    className="rounded p-1 text-muted-foreground hover:bg-secondary disabled:opacity-30"
+                    className="rounded-none p-1 text-muted-foreground hover:bg-secondary disabled:opacity-30"
                     aria-label="Move down"
                   >
                     <ChevronDown className="h-3.5 w-3.5" />
@@ -257,7 +257,7 @@ export function RunOfShowList({
                   <button
                     type="button"
                     onClick={() => openEdit(item)}
-                    className="rounded p-1 text-muted-foreground hover:bg-secondary"
+                    className="rounded-none p-1 text-muted-foreground hover:bg-secondary"
                     aria-label="Edit"
                   >
                     <Save className="h-3.5 w-3.5" />
@@ -266,7 +266,7 @@ export function RunOfShowList({
                     type="button"
                     onClick={() => handleDelete(item.id)}
                     disabled={pending}
-                    className="rounded p-1 text-muted-foreground hover:bg-destructive/20 hover:text-destructive"
+                    className="rounded-none p-1 text-muted-foreground hover:bg-destructive/20 hover:text-destructive"
                     aria-label="Delete"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
@@ -331,7 +331,7 @@ export function RunOfShowList({
               <div className="space-y-2">
                 <Label>Assigned to</Label>
                 <select
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  className="w-full rounded-none border-2 border-input bg-background px-3 py-2 text-sm"
                   value={form.assignedTo}
                   onChange={(e) => setForm((f) => ({ ...f, assignedTo: e.target.value }))}
                 >
@@ -349,7 +349,7 @@ export function RunOfShowList({
               <div className="space-y-2">
                 <Label>Related script</Label>
                 <select
-                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  className="w-full rounded-none border-2 border-input bg-background px-3 py-2 text-sm"
                   value={form.scriptId}
                   onChange={(e) => setForm((f) => ({ ...f, scriptId: e.target.value }))}
                 >

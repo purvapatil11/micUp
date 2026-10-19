@@ -59,8 +59,8 @@ export function ScriptExport({ script }: { script: ExportableScript }) {
         </Button>
       </div>
 
-      <article className="script-export-doc rounded-lg border border-border bg-card/60 p-6 sm:p-8 print:border-0 print:p-0">
-        <header className="mb-6 border-b border-border pb-4">
+      <article className="script-export-doc rounded-none border-2 border-foreground bg-card p-6 sm:p-8 print:border-0 print:p-0">
+        <header className="mb-6 border-b-2 border-foreground pb-4">
           <h1 className="text-2xl font-bold">{script.title}</h1>
           <div className="mt-3 flex flex-wrap items-center gap-2 print:hidden">
             <ScriptStatusBadge status={script.status} />

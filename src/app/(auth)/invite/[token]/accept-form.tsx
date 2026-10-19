@@ -70,7 +70,7 @@ export function AcceptInviteForm({
   }
 
   return (
-    <Card className="border-border bg-card/80 backdrop-blur">
+    <Card>
       <CardHeader>
         <CardTitle>Join MicUp</CardTitle>
         <CardDescription>
@@ -78,7 +78,7 @@ export function AcceptInviteForm({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="mb-4 space-y-1.5 rounded-lg border border-border bg-secondary/40 p-3 text-sm">
+        <div className="mb-4 space-y-1.5 rounded-none border-2 border-foreground bg-secondary p-3 text-sm">
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground">Email</span>
             <span className="font-medium">{email}</span>
@@ -129,7 +129,7 @@ export function AcceptInviteForm({
           </div>
 
           {error ? (
-            <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            <p className="rounded-none border-2 border-destructive bg-destructive/10 px-3 py-2 text-sm text-destructive">
               {error}
             </p>
           ) : null}

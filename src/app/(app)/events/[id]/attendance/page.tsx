@@ -189,7 +189,7 @@ export default async function AttendancePage({
               {attendance.map((a) => (
                 <div
                   key={a.id}
-                  className="flex items-center justify-between rounded-lg border border-border/60 px-3 py-2 text-sm"
+                  className="flex items-center justify-between rounded-none border-2 border-foreground px-3 py-2 text-sm"
                 >
                   <div>
                     <p className="font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>

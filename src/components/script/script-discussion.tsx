@@ -132,7 +132,7 @@ export function ScriptDiscussion({
         <span className="text-xs font-normal text-muted-foreground">({comments.length})</span>
       </h3>
 
-      <div className="max-h-96 space-y-3 overflow-y-auto rounded-lg border border-border bg-card/40 p-4">
+      <div className="max-h-96 space-y-3 overflow-y-auto rounded-none border-2 border-foreground bg-background p-4">
         {comments.length === 0 ? (
           <p className="py-6 text-center text-sm text-muted-foreground">
             No comments yet. Start the conversation.

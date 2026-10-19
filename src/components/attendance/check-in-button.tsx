@@ -79,7 +79,7 @@ export function CheckInButton({
 
   if (alreadyCheckedIn) {
     return (
-      <div className="flex items-center gap-2 rounded-lg border border-success/30 bg-success/10 px-4 py-3 text-sm text-success">
+      <div className="flex items-center gap-2 rounded-none border-2 border-success bg-success/10 px-4 py-3 text-sm text-success">
         <CheckCircle2 className="h-4 w-4" />
         You have already checked in for this event.
       </div>
@@ -101,10 +101,10 @@ export function CheckInButton({
 
       {result ? (
         <div
-          className={`flex items-start gap-2 rounded-lg border px-4 py-3 text-sm ${
+          className={`flex items-start gap-2 rounded-none border px-4 py-3 text-sm ${
             result.ok
-              ? "border-success/30 bg-success/10 text-success"
-              : "border-destructive/30 bg-destructive/10 text-destructive"
+              ? "border-2 border-success bg-success/10 text-success"
+              : "border-2 border-destructive bg-destructive/10 text-destructive"
           }`}
         >
           {result.ok ? (

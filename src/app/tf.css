@@ -1,0 +1,130 @@
+/*
+ * TechFiesta style kit — ported from IOIT-ACM/ioit-tenet
+ * (src/app/techfiesta/techfiesta.css, MIT license).
+ * Neobrutalist tokens: 3px navy borders, hard blue offset shadows,
+ * square corners, stepped (steps(2)) hovers.
+ */
+
+:where(.tf-scope) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Buttons: flat blocks, hard color-swap hovers ---------- */
+
+.tf-btn-k,
+.tf-btn-w,
+.tf-btn-b {
+  transition:
+    background-color 0.1s steps(2),
+    color 0.1s steps(2),
+    transform 0.1s steps(2);
+}
+.tf-btn-k:active,
+.tf-btn-w:active,
+.tf-btn-b:active {
+  transform: scale(0.96);
+}
+
+.tf-btn-k {
+  background: #000000;
+  color: #ffffff;
+}
+.tf-btn-k:hover {
+  background: #0000c8;
+  color: #ffffff;
+}
+
+.tf-btn-w {
+  background: #ffffff;
+  color: #050530;
+}
+.tf-btn-w:hover {
+  background: #cfd5ff;
+  color: #050530;
+}
+
+.tf-btn-b {
+  background: #0000c8;
+  color: #ffffff;
+}
+.tf-btn-b:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* ---------- Cards: hard offset shadow, lift on hover ---------- */
+
+.tf-card {
+  box-shadow: 8px 8px 0 #0000c8;
+  transition:
+    transform 0.12s steps(2),
+    box-shadow 0.12s steps(2);
+}
+.tf-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #0000c8;
+}
+
+.tf-card-dark {
+  box-shadow: 8px 8px 0 #0000c8;
+  transition:
+    transform 0.12s steps(2),
+    box-shadow 0.12s steps(2);
+}
+.tf-card-dark:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 #8c96ff;
+}
+
+/* ---------- Dot-grid art panel ---------- */
+
+.tf-art {
+  background-color: #cfd5ff;
+  background-image: radial-gradient(#aab3f5 1.2px, transparent 1.2px);
+  background-size: 12px 12px;
+}
+
+/* ---------- Focus + micro-interactions ---------- */
+
+.tf-scope a:focus-visible {
+  outline: 3px solid #ff9f1c;
+  outline-offset: 3px;
+}
+
+.tf-arrow-nudge {
+  transition: transform 0.12s steps(2);
+}
+a:hover .tf-arrow-nudge {
+  transform: translate(3px, -3px);
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.tf-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tf-reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tf-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tf-btn-k,
+  .tf-btn-w,
+  .tf-btn-b,
+  .tf-card,
+  .tf-card-dark,
+  .tf-arrow-nudge {
+    transition: none !important;
+  }
+}

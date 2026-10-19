@@ -75,9 +75,9 @@ export function VersionHistory({
           {versions.map((v) => (
             <div
               key={v.id}
-              className={`rounded-lg border p-3 transition-colors ${
-                selected?.id === v.id ? "border-primary/40 bg-secondary/60" : "border-border"
-              }`}
+                className={`rounded-none border-2 p-3 transition-colors ${
+                  selected?.id === v.id ? "border-foreground bg-secondary" : "border-foreground bg-background hover:bg-secondary"
+                }`}
             >
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
@@ -118,7 +118,7 @@ export function VersionHistory({
               </div>
 
               {selected?.id === v.id ? (
-                <div className="mt-3 rounded border border-border bg-background/60 p-3">
+                <div className="mt-3 rounded-none border-2 border-foreground bg-background p-3">
                   <ScriptContent content={v.content} />
                 </div>
               ) : null}

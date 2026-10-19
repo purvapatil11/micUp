@@ -1,56 +1,59 @@
 @import "tailwindcss";
+@import "./tf.css";
 
 /*
- * MicUp design tokens — dark, backstage control-room aesthetic.
- * Near-black canvas, hairline borders, restrained amber (stage light) accent.
+ * MicUp design tokens — TechFiesta light theme (matched to ioit-tenet /techfiesta).
+ * White canvas, navy #050530 ink/borders, electric-blue #0000c8 accent,
+ * periwinkle #cfd5ff highlights. HSL triplets, no color function wrapper.
  */
 
 :root {
-  --background: 240 6% 5%;
-  --foreground: 240 6% 93%;
-  --card: 240 5% 8%;
-  --card-foreground: 240 6% 93%;
-  --popover: 240 5% 7%;
-  --popover-foreground: 240 6% 93%;
+  --background: 0 0% 100%;
+  --foreground: 240 81% 26%;
 
-  --primary: 38 92% 55%;
-  --primary-foreground: 240 8% 6%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 81% 26%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 81% 26%;
 
-  --secondary: 240 4% 12%;
-  --secondary-foreground: 240 6% 88%;
+  --primary: 240 100% 39%;
+  --primary-foreground: 0 0% 100%;
 
-  --muted: 240 4% 11%;
-  --muted-foreground: 240 5% 58%;
+  --secondary: 233 100% 91%;
+  --secondary-foreground: 240 81% 26%;
 
-  --accent: 240 4% 13%;
-  --accent-foreground: 240 6% 93%;
+  --muted: 233 100% 96%;
+  --muted-foreground: 233 38% 42%;
 
-  --destructive: 0 72% 55%;
-  --destructive-foreground: 0 0% 98%;
+  --accent: 233 100% 91%;
+  --accent-foreground: 240 81% 26%;
 
-  --success: 148 55% 44%;
-  --success-foreground: 0 0% 4%;
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 0 0% 100%;
 
-  --warning: 38 92% 55%;
+  --success: 152 55% 32%;
+  --success-foreground: 0 0% 100%;
+
+  --warning: 38 92% 45%;
   --warning-foreground: 240 8% 6%;
 
-  --info: 210 75% 58%;
-  --info-foreground: 0 0% 98%;
+  --info: 240 100% 39%;
+  --info-foreground: 0 0% 100%;
 
-  --border: 240 4% 15%;
-  --input: 240 4% 17%;
-  --ring: 38 92% 55%;
+  --border: 233 60% 86%;
+  --input: 240 81% 26%;
+  --ring: 240 100% 39%;
 
-  --radius: 0.625rem;
+  --radius: 0.125rem;
 
-  --sidebar: 240 6% 6.5%;
-  --sidebar-foreground: 240 5% 78%;
-  --sidebar-accent: 240 4% 11%;
-  --sidebar-border: 240 4% 13%;
-  --sidebar-ring: 38 92% 55%;
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 240 81% 26%;
+  --sidebar-accent: 233 100% 91%;
+  --sidebar-border: 240 81% 26%;
+  --sidebar-ring: 240 100% 39%;
 
-  --stage-cue: 262 70% 62%;
-  --stage-cue-foreground: 0 0% 98%;
+  --stage-cue: 262 75% 45%;
+  --stage-cue-foreground: 0 0% 100%;
 }
 
 @theme inline {
@@ -86,12 +89,13 @@
   --color-stage-cue: var(--stage-cue);
   --color-stage-cue-foreground: var(--stage-cue-foreground);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: 0px;
+  --radius-md: 0px;
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-pixelify), var(--font-space-grotesk), ui-sans-serif, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
@@ -100,7 +104,7 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {

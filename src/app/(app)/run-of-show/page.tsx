@@ -99,10 +99,10 @@ export default async function RunOfShowPage({
           <Link
             key={ev.id}
             href={`/run-of-show?event=${ev.id}`}
-            className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
+            className={`rounded-none border-2 border-foreground px-3 py-1.5 text-sm transition-colors ${
               ev.id === selectedEventId
-                ? "border-primary/40 bg-primary/10 text-primary"
-                : "border-border text-muted-foreground hover:border-border hover:text-foreground"
+                ? "bg-primary text-primary-foreground"
+                : "bg-background text-muted-foreground hover:bg-secondary hover:text-foreground"
             }`}
           >
             {ev.name}

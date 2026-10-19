@@ -122,12 +122,12 @@ export function CreateScriptForm({
 
           <div className="space-y-2">
             <Label>Assigned anchors</Label>
-            <div className="max-h-48 overflow-y-auto rounded-lg border border-border p-3 space-y-1.5">
+            <div className="max-h-48 overflow-y-auto rounded-none border-2 border-foreground p-3 space-y-1.5">
               {members.map((m) => (
                 <label key={m.id} className="flex items-center gap-2 text-sm">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 rounded border-border"
+                    className="h-4 w-4 rounded-none border-2 border-foreground"
                     checked={assignedTo.includes(m.id)}
                     onChange={(e) => {
                       if (e.target.checked) {
@@ -145,7 +145,7 @@ export function CreateScriptForm({
           </div>
 
           {error ? (
-            <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            <p className="rounded-none border-2 border-destructive bg-destructive/10 px-3 py-2 text-sm text-destructive">
               {error}
             </p>
           ) : null}

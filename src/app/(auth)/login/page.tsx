@@ -42,7 +42,7 @@ export default function LoginPage() {
   }
 
   return (
-    <Card className="border-border bg-card/80 backdrop-blur">
+    <Card>
       <CardHeader>
         <CardTitle>Sign in</CardTitle>
         <CardDescription>
@@ -84,7 +84,7 @@ export default function LoginPage() {
           </div>
 
           {error ? (
-            <p className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            <p className="rounded-none border-2 border-destructive bg-destructive/10 px-3 py-2 text-sm text-destructive">
               {error}
             </p>
           ) : null}

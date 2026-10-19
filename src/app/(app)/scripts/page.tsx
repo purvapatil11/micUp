@@ -105,7 +105,7 @@ export default async function ScriptsPage({
           {scripts.map((script) => (
             <div key={script.id} className="flex h-full flex-col">
               <Link href={`/scripts/${script.id}`} className="block flex-1">
-                <Card className="h-full transition-colors hover:border-primary/40">
+                <Card className="tf-card h-full">
                   <CardContent className="space-y-3 p-4">
                     <div className="flex items-start justify-between gap-2">
                       <h3 className="line-clamp-2 text-sm font-semibold leading-snug">

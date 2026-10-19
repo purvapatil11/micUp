@@ -67,7 +67,7 @@ export function MemberRow({
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-lg border border-border/60 px-4 py-3">
+    <div className="flex items-center justify-between gap-3 rounded-none border-2 border-foreground px-4 py-3">
       <div className="flex min-w-0 items-center gap-3">
         <Avatar className="h-9 w-9">
           <AvatarImage src={member.avatar_url ?? undefined} alt="" />
@@ -94,7 +94,7 @@ export function MemberRow({
               value={member.role}
               onChange={(e) => changeRole(e.target.value as Role)}
               disabled={pending}
-              className="rounded-md border border-input bg-background px-2 py-1 text-xs"
+              className="rounded-none border-2 border-input bg-background px-2 py-1 text-xs"
             >
               {Object.entries(ROLE_LABELS).map(([key, label]) => (
                 <option key={key} value={key}>

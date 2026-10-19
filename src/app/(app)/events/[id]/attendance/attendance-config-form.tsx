@@ -96,7 +96,7 @@ export function AttendanceConfigForm({
           type="checkbox"
           checked={enabled}
           onChange={(e) => setEnabled(e.target.checked)}
-          className="h-4 w-4 rounded border-border"
+          className="h-4 w-4 rounded-none border-2 border-foreground"
         />
         Enable GPS attendance for this event
       </label>

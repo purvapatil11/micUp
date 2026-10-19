@@ -39,8 +39,8 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
   const pathname = usePathname();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-56 flex-col border-r border-sidebar-border bg-sidebar lg:flex">
-      <div className="flex h-14 items-center border-b border-sidebar-border px-4">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-56 flex-col border-r-[3px] border-foreground bg-sidebar lg:flex">
+      <div className="flex h-14 items-center border-b-[3px] border-foreground px-4">
         <Link href="/dashboard">
           <MicUpLogo size={26} />
         </Link>
@@ -61,21 +61,21 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
                     <Link
                       href={item.href}
                       className={cn(
-                        "group flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm font-medium transition-colors",
+                        "group flex items-center gap-2.5 rounded-none px-2 py-1.5 text-sm font-semibold transition-colors duration-100 [transition-timing-function:steps(2)]",
                         active
-                          ? "bg-sidebar-accent text-foreground"
-                          : "text-sidebar-foreground hover:bg-sidebar-accent/60 hover:text-foreground"
+                          ? "bg-primary text-primary-foreground"
+                          : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-foreground"
                       )}
                     >
                       <item.icon
                         className={cn(
                           "h-4 w-4 shrink-0",
-                          active ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
+                          active ? "text-primary-foreground" : "text-muted-foreground group-hover:text-foreground"
                         )}
                       />
                       <span className="flex-1">{item.label}</span>
                       {item.href === "/announcements" && pendingAnnouncementsPath ? (
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-label="Unread announcements" />
+                        <span className="h-2 w-2 rounded-none bg-warning" aria-label="Unread announcements" />
                       ) : null}
                     </Link>
                   </li>
@@ -86,8 +86,8 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
         ))}
       </nav>
 
-      <div className="border-t border-sidebar-border p-3">
-        <div className="flex items-center gap-2 rounded-md bg-sidebar-accent/50 px-2.5 py-2 text-xs text-muted-foreground">
+      <div className="border-t-[3px] border-foreground p-3">
+        <div className="flex items-center gap-2 border-2 border-foreground bg-secondary px-2.5 py-2 text-xs font-semibold text-secondary-foreground">
           <Radio className="h-3.5 w-3.5 text-primary" />
           <span>Backstage workspace</span>
         </div>
@@ -102,7 +102,7 @@ export function MobileNav() {
   const items = NAV_SECTIONS.flatMap((s) => s.items);
 
   return (
-    <nav className="flex gap-1 overflow-x-auto border-b border-border bg-sidebar px-3 py-2 lg:hidden">
+    <nav className="flex gap-1 overflow-x-auto border-b-[3px] border-foreground bg-sidebar px-3 py-2 lg:hidden">
       {items.map((item) => {
         const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
         return (
@@ -110,9 +110,9 @@ export function MobileNav() {
             key={item.href}
             href={item.href}
             className={cn(
-              "flex shrink-0 items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium",
+              "flex shrink-0 items-center gap-1.5 rounded-none px-2.5 py-1.5 text-xs font-semibold",
               active
-                ? "bg-sidebar-accent text-foreground"
+                ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground"
             )}
           >

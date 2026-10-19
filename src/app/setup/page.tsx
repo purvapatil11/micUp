@@ -23,8 +23,8 @@ export default function SetupPage() {
           </CardHeader>
           <CardContent className="space-y-4 text-sm text-muted-foreground">
             <p>
-              Copy <code className="rounded bg-secondary px-1.5 py-0.5">.env.example</code> to{" "}
-              <code className="rounded bg-secondary px-1.5 py-0.5">.env.local</code> and fill in
+              Copy <code className="rounded-none bg-secondary px-1.5 py-0.5">.env.example</code> to{" "}
+              <code className="rounded-none bg-secondary px-1.5 py-0.5">.env.local</code> and fill in
               your Supabase project values, then restart the dev server.
             </p>
             <ul className="list-disc space-y-1.5 pl-5">

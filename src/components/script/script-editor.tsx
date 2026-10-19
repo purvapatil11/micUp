@@ -208,7 +208,7 @@ export function ScriptEditor({
       </div>
 
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-border bg-secondary/40 p-1.5">
+      <div className="flex flex-wrap items-center gap-1.5 rounded-none border-2 border-foreground bg-secondary p-1.5">
         {(
           [
             ["Bold", () => editor.chain().focus().toggleBold().run(), editor.isActive("bold")],
@@ -225,8 +225,8 @@ export function ScriptEditor({
             key={label}
             type="button"
             onClick={cmd}
-            className={`rounded px-2 py-1 text-xs font-medium transition-colors ${
-              active ? "bg-primary/20 text-primary" : "text-muted-foreground hover:bg-secondary"
+            className={`rounded-none px-2 py-1 text-xs font-medium transition-colors ${
+              active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
             }`}
           >
             {label}
@@ -235,7 +235,7 @@ export function ScriptEditor({
       </div>
 
       {/* Status row */}
-      <div className="flex flex-wrap items-center gap-3 rounded-lg border border-border bg-card/60 p-3">
+      <div className="flex flex-wrap items-center gap-3 rounded-none border-2 border-foreground bg-background p-3">
         <div className="flex items-center gap-2">
           <Label className="text-xs text-muted-foreground">Status</Label>
           <Select
@@ -298,7 +298,7 @@ export function ScriptEditor({
 
       {/* Conflict banner */}
       {conflictInfo ? (
-        <div className="flex flex-col gap-2 rounded-lg border border-warning/40 bg-warning/10 p-4 sm:flex-row sm:items-center">
+        <div className="flex flex-col gap-2 rounded-none border-2 border-warning bg-warning/10 p-4 sm:flex-row sm:items-center">
           <div className="flex items-center gap-2 text-sm text-warning-foreground">
             <AlertTriangle className="h-4 w-4 shrink-0" />
             <span>{conflictInfo}</span>
@@ -315,7 +315,7 @@ export function ScriptEditor({
       ) : null}
 
       {/* Editor */}
-      <div className="rounded-lg border border-border bg-card/60">
+      <div className="rounded-none border-2 border-foreground bg-background">
         <EditorContent editor={editor} className="tiptap-editor" />
       </div>
 

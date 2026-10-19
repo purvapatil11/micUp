@@ -44,7 +44,7 @@ export function PendingInvites({ invites }: { invites: Invite[] }) {
       {invites.map((invite) => (
         <div
           key={invite.id}
-          className="flex items-center justify-between gap-3 rounded-lg border border-border/60 px-4 py-3"
+          className="flex items-center justify-between gap-3 rounded-none border-2 border-foreground px-4 py-3"
         >
           <div className="flex min-w-0 items-center gap-3">
             <Mail className="h-4 w-4 shrink-0 text-muted-foreground" />

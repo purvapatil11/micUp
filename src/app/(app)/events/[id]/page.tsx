@@ -108,7 +108,7 @@ export default async function EventDetailPage({
       />
 
       {/* Meta */}
-      <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 rounded-lg border border-border bg-card/60 px-4 py-3 text-sm text-muted-foreground">
+      <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 rounded-none border-2 border-foreground bg-background px-4 py-3 text-sm text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <CalendarDays className="h-4 w-4" />
           {formatDate(event.event_date)}
@@ -149,7 +149,7 @@ export default async function EventDetailPage({
               assignments.map((a) => (
                 <div
                   key={a.id}
-                  className="flex items-center justify-between rounded-lg border border-border/60 px-3 py-2"
+                  className="flex items-center justify-between rounded-none border-2 border-foreground px-3 py-2"
                 >
                   <div>
                     <p className="text-sm font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>
@@ -184,7 +184,7 @@ export default async function EventDetailPage({
                 <Link
                   key={s.id}
                   href={`/scripts/${s.id}`}
-                  className="flex items-center justify-between rounded-lg border border-border/60 px-3 py-2 transition-colors hover:border-border hover:bg-secondary/40"
+                  className="flex items-center justify-between rounded-none border-2 border-foreground px-3 py-2 transition-colors hover:bg-secondary"
                 >
                   <p className="truncate text-sm font-medium">{s.title}</p>
                   <ScriptStatusBadge status={s.status} />
@@ -211,8 +211,8 @@ export default async function EventDetailPage({
             ) : (
               <ol className="space-y-2">
                 {rosItems.slice(0, 8).map((item) => (
-                  <li key={item.id} className="flex items-start gap-3 rounded-lg border border-border/60 px-3 py-2">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-secondary text-[10px] font-bold">
+                  <li key={item.id} className="flex items-start gap-3 rounded-none border-2 border-foreground px-3 py-2">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-none bg-secondary text-[10px] font-bold">
                       {item.sequence}
                     </span>
                     <div className="min-w-0">
@@ -222,7 +222,7 @@ export default async function EventDetailPage({
                         {(item as any).assignee?.full_name ? ` · ${(item as any).assignee.full_name}` : ""}
                       </p>
                       {item.stage_cue ? (
-                        <p className="mt-1 rounded bg-stage-cue/10 px-2 py-1 text-xs text-stage-cue">
+                        <p className="mt-1 rounded-none bg-stage-cue/10 px-2 py-1 text-xs text-stage-cue">
                           Cue: {item.stage_cue}
                         </p>
                       ) : null}
