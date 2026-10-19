@@ -140,8 +140,18 @@ create policy "scripts_insert_active"
 create policy "scripts_update_active"
   on public.scripts for update
   to authenticated
-  using (public.fn_has_active_profile())
-  with check (public.fn_has_active_profile());
+  using (
+    public.fn_has_active_profile()
+    and (public.fn_is_officer_uid(auth.uid())
+         or created_by = auth.uid()
+         or auth.uid() = any(coalesce(assigned_to, array[]::uuid[])))
+  )
+  with check (
+    public.fn_has_active_profile()
+    and (public.fn_is_officer_uid(auth.uid())
+         or created_by = auth.uid()
+         or auth.uid() = any(coalesce(assigned_to, array[]::uuid[])))
+  );
 
 create policy "scripts_delete_officer"
   on public.scripts for delete
@@ -225,6 +235,14 @@ begin
   select * into v_script from public.scripts where id = p_script_id for update;
   if not found then
     raise exception 'Script not found.';
+  end if;
+
+  -- Editing restricted to officers, the creator and assigned anchors
+  -- (mirror of canEditScript in src/lib/permissions.ts).
+  if not (public.fn_is_officer_uid(v_uid)
+          or v_script.created_by = v_uid
+          or v_uid = any(coalesce(v_script.assigned_to, array[]::uuid[]))) then
+    raise exception 'Only the Anchoring Officer, a Deputy Anchoring Officer, or an assigned anchor can edit this script.';
   end if;
 
   -- Conflict: someone else saved since this editor loaded the script.

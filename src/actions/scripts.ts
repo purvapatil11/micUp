@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { requireUser, requireOfficer } from "@/lib/auth";
-import { authorizeScriptStatusChange } from "@/lib/permissions";
+import { authorizeScriptStatusChange, canEditScript } from "@/lib/permissions";
 import {
   createScriptSchema,
   saveScriptSchema,
@@ -82,9 +82,25 @@ export async function saveScriptAction(
 
     const { data: current } = await (await createClient())
       .from("scripts")
-      .select("status, content, title")
+      .select("status, content, title, created_by, assigned_to")
       .eq("id", parsed.data.scriptId)
       .single();
+
+    if (
+      current &&
+      !canEditScript({
+        actorRole: user.profile.role,
+        actorId: user.id,
+        createdBy: current.created_by,
+        assignedTo: current.assigned_to,
+      })
+    ) {
+      return {
+        ok: false,
+        error:
+          "Only the Anchoring Officer, a Deputy Anchoring Officer, or an assigned anchor can edit this script.",
+      };
+    }
 
     const contentChanged = Boolean(
       current && (JSON.stringify(current.content) !== JSON.stringify(parsed.data.content) || current.title !== parsed.data.title)

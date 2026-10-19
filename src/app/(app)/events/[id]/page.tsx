@@ -59,7 +59,7 @@ export default async function EventDetailPage({
       .order("sequence", { ascending: true }),
     supabase
       .from("attendance")
-      .select("id, status, method, checked_in_at, member:profiles(full_name)")
+      .select("id, status, method, checked_in_at, member:profiles!attendance_profile_id_fkey(full_name)")
       .eq("event_id", id),
   ]);
 

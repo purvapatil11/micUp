@@ -7,6 +7,7 @@ import {
   canPublishAnnouncements,
   canManageTeam,
   canCorrectAttendance,
+  canEditScript,
   allowedStatusTransitions,
   authorizeScriptStatusChange,
 } from "@/lib/permissions";
@@ -42,6 +43,47 @@ describe("role helpers", () => {
       }
       expect(gate(memberRole)).toBe(false);
     }
+  });
+});
+
+describe("canEditScript", () => {
+  const base = { createdBy: "creator-1", assignedTo: ["assignee-1"] };
+
+  it("allows both officer roles regardless of assignment", () => {
+    for (const actorRole of ["anchoring_officer", "deputy_anchoring_officer"] as const) {
+      expect(
+        canEditScript({ ...base, actorRole, actorId: "stranger" })
+      ).toBe(true);
+    }
+  });
+
+  it("allows the creator", () => {
+    expect(
+      canEditScript({ ...base, actorRole: "team_member", actorId: "creator-1" })
+    ).toBe(true);
+  });
+
+  it("allows an assigned anchor", () => {
+    expect(
+      canEditScript({ ...base, actorRole: "team_member", actorId: "assignee-1" })
+    ).toBe(true);
+  });
+
+  it("blocks an unassigned team member", () => {
+    expect(
+      canEditScript({ ...base, actorRole: "team_member", actorId: "someone-else" })
+    ).toBe(false);
+  });
+
+  it("handles missing assignment list", () => {
+    expect(
+      canEditScript({
+        actorRole: "team_member",
+        actorId: "someone-else",
+        createdBy: "creator-1",
+        assignedTo: null,
+      })
+    ).toBe(false);
   });
 });
 

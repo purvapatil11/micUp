@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Radio, Users, FileDown } from "lucide-react";
+import { ArrowLeft, Radio, Users } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { isOfficer } from "@/lib/permissions";
@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckInButton } from "@/components/attendance/check-in-button";
 import { ManualCorrectionDialog } from "@/components/attendance/manual-correction-dialog";
 import { AttendanceConfigForm } from "./attendance-config-form";
+import { ExportCsvButton } from "./export-csv-button";
 
 export const metadata = { title: "Attendance" };
 export const dynamic = "force-dynamic";
@@ -37,12 +38,12 @@ export default async function AttendancePage({
   const [attendanceRes, auditRes, assignedRes, membersRes] = await Promise.all([
     supabase
       .from("attendance")
-      .select("id, status, method, checked_in_at, distance_m, marked_by, reason, profile_id, member:profiles(full_name, role), marker:marked_by(full_name)")
+      .select("id, status, method, checked_in_at, distance_m, marked_by, reason, profile_id, member:profiles!attendance_profile_id_fkey(full_name, role), marker:marked_by(full_name)")
       .eq("event_id", id)
       .order("created_at", { ascending: false }),
     supabase
       .from("attendance_audit_log")
-      .select("id, profile_id, action, outcome, distance_m, created_at, member:profiles(full_name), actor:actor_id(full_name)")
+      .select("id, profile_id, action, outcome, distance_m, created_at, member:profiles!attendance_audit_log_profile_id_fkey(full_name), actor:actor_id(full_name)")
       .eq("event_id", id)
       .order("created_at", { ascending: false })
       .limit(50),
@@ -72,29 +73,19 @@ export default async function AttendancePage({
 
   const canExport = officer;
 
-  function exportCsv() {
-    const rows = [
-      ["Name", "Role", "Status", "Method", "Checked In At", "Distance (m)", "Marked By", "Reason"],
-      ...attendance.map((a) => [
-        (a as any).member?.full_name ?? "",
-        (a as any).member?.role ?? "",
-        a.status,
-        a.method,
-        a.checked_in_at ?? "",
-        a.distance_m != null ? String(a.distance_m) : "",
-        (a as any).marker?.full_name ?? "",
-        a.reason ?? "",
-      ]),
-    ];
-    const csv = rows.map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `attendance-${event.name}-${event.event_date}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-  }
+  const exportRows: string[][] = [
+    ["Name", "Role", "Status", "Method", "Checked In At", "Distance (m)", "Marked By", "Reason"],
+    ...attendance.map((a) => [
+      (a as any).member?.full_name ?? "",
+      (a as any).member?.role ?? "",
+      a.status,
+      a.method,
+      a.checked_in_at ?? "",
+      a.distance_m != null ? String(a.distance_m) : "",
+      (a as any).marker?.full_name ?? "",
+      a.reason ?? "",
+    ]),
+  ];
 
   return (
     <div>
@@ -111,9 +102,10 @@ export default async function AttendancePage({
         description={`${event.name} · ${formatDate(event.event_date)}`}
         actions={
           canExport && attendance.length > 0 ? (
-            <Button variant="outline" size="sm" onClick={exportCsv}>
-              <FileDown className="h-4 w-4" /> Export CSV
-            </Button>
+            <ExportCsvButton
+              filename={`attendance-${event.name}-${event.event_date}.csv`}
+              rows={exportRows}
+            />
           ) : undefined
         }
       />

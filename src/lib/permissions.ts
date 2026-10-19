@@ -34,6 +34,22 @@ export function canViewAttendanceReport(role: Role | null | undefined): boolean 
 }
 
 /**
+ * Who may edit a script (content, title, status): the Anchoring Officer,
+ * a Deputy Anchoring Officer, the script's creator, or a member the script
+ * is assigned to. Everyone else can read and comment, but not edit.
+ */
+export function canEditScript(check: {
+  actorRole: Role | null | undefined;
+  actorId: string;
+  createdBy: string | null | undefined;
+  assignedTo?: string[] | null;
+}): boolean {
+  if (isOfficer(check.actorRole)) return true;
+  if (check.createdBy && check.createdBy === check.actorId) return true;
+  return (check.assignedTo ?? []).includes(check.actorId);
+}
+
+/**
  * Statuses a member with the given role is allowed to set.
  *
  * - Everyone may move scripts through the authoring pipeline.

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FileText, Plus, Search } from "lucide-react";
+import { FileDown, FileText, Plus } from "lucide-react";
 import { requireUser, getActiveMembers } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { isOfficer } from "@/lib/permissions";
@@ -9,20 +9,11 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { ScriptStatusBadge, ScriptCategoryBadge } from "@/components/domain-badges";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ScriptsFilterBar } from "./scripts-filter-bar";
 import {
   SCRIPT_STATUSES,
-  SCRIPT_STATUS_LABELS,
   SCRIPT_CATEGORIES,
-  SCRIPT_CATEGORY_LABELS,
 } from "@/types/database";
 
 export const metadata = { title: "Scripts" };
@@ -82,65 +73,19 @@ export default async function ScriptsPage({
       />
 
       {/* Filters */}
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <form className="flex-1" method="GET">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              name="q"
-              defaultValue={params.q ?? ""}
-              placeholder="Search by title…"
-              className="pl-9"
-            />
-          </div>
-          <input type="hidden" name="status" value={params.status ?? ""} />
-          <input type="hidden" name="category" value={params.category ?? ""} />
-        </form>
-        <div className="flex gap-2">
-          <Select
-            defaultValue={params.status ?? "all"}
-            onValueChange={(v) => {
-              const url = new URL(window.location.href);
-              if (v === "all") url.searchParams.delete("status");
-              else url.searchParams.set("status", v);
-              window.location.href = url.toString();
-            }}
-          >
-            <SelectTrigger className="w-36">
-              <SelectValue placeholder="Status" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All statuses</SelectItem>
-              {SCRIPT_STATUSES.map((s) => (
-                <SelectItem key={s} value={s}>
-                  {SCRIPT_STATUS_LABELS[s]}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Select
-            defaultValue={params.category ?? "all"}
-            onValueChange={(v) => {
-              const url = new URL(window.location.href);
-              if (v === "all") url.searchParams.delete("category");
-              else url.searchParams.set("category", v);
-              window.location.href = url.toString();
-            }}
-          >
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="Category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All categories</SelectItem>
-              {SCRIPT_CATEGORIES.map((c) => (
-                <SelectItem key={c} value={c}>
-                  {SCRIPT_CATEGORY_LABELS[c]}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
+      <ScriptsFilterBar
+        q={params.q ?? ""}
+        status={
+          params.status && SCRIPT_STATUSES.includes(params.status as any)
+            ? params.status
+            : "all"
+        }
+        category={
+          params.category && SCRIPT_CATEGORIES.includes(params.category as any)
+            ? params.category
+            : "all"
+        }
+      />
 
       {scripts.length === 0 ? (
         <EmptyState
@@ -158,35 +103,48 @@ export default async function ScriptsPage({
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {scripts.map((script) => (
-            <Link key={script.id} href={`/scripts/${script.id}`}>
-              <Card className="h-full transition-colors hover:border-primary/40">
-                <CardContent className="space-y-3 p-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <h3 className="line-clamp-2 text-sm font-semibold leading-snug">
-                      {script.title}
-                    </h3>
-                    <ScriptStatusBadge status={script.status} />
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <ScriptCategoryBadge category={script.category} />
-                    {(script as any).events ? (
-                      <Badge variant="outline" className="font-normal">
-                        {(script as any).events.name}
-                      </Badge>
-                    ) : null}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    {script.deadline ? (
-                      <p>Deadline: {formatDate(script.deadline)}</p>
-                    ) : null}
-                    <p>Updated {relativeTime(script.updated_at)}</p>
-                    {(script as any).last_editor ? (
-                      <p>by {(script as any).last_editor.full_name}</p>
-                    ) : null}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+            <div key={script.id} className="flex h-full flex-col">
+              <Link href={`/scripts/${script.id}`} className="block flex-1">
+                <Card className="h-full transition-colors hover:border-primary/40">
+                  <CardContent className="space-y-3 p-4">
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 className="line-clamp-2 text-sm font-semibold leading-snug">
+                        {script.title}
+                      </h3>
+                      <ScriptStatusBadge status={script.status} />
+                    </div>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <ScriptCategoryBadge category={script.category} />
+                      {(script as any).events ? (
+                        <Badge variant="outline" className="font-normal">
+                          {(script as any).events.name}
+                        </Badge>
+                      ) : null}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {script.deadline ? (
+                        <p>Deadline: {formatDate(script.deadline)}</p>
+                      ) : null}
+                      <p>Updated {relativeTime(script.updated_at)}</p>
+                      {(script as any).last_editor ? (
+                        <p>by {(script as any).last_editor.full_name}</p>
+                      ) : null}
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+              <div className="mt-1.5 flex justify-end">
+                <Button asChild variant="ghost" size="sm" className="text-muted-foreground">
+                  <Link
+                    href={`/scripts/${script.id}/export`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FileDown className="h-3.5 w-3.5" /> Export PDF
+                  </Link>
+                </Button>
+              </div>
+            </div>
           ))}
         </div>
       )}

@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 export default async function RunOfShowPage({
   searchParams,
 }: {
-  searchParams: Promise<{ event?: string }>;
+  searchParams: Promise<{ event?: string; new?: string }>;
 }) {
   const user = await requireUser();
   const officer = isOfficer(user.profile.role);
@@ -117,27 +117,18 @@ export default async function RunOfShowPage({
           title="No events yet"
           description="Create an event first to plan its run of show."
         />
-      ) : items.length === 0 ? (
+      ) : items.length === 0 && !officer ? (
         <EmptyState
           icon={<ListOrdered className="h-5 w-5" />}
           title="No run-of-show items yet"
-          description="Add segments, speakers and stage cues to build the event sequence."
-          action={
-            officer ? (
-              <Button asChild size="sm">
-                <Link href={`/run-of-show?event=${selectedEventId}&new=1`}>
-                  <Plus /> Add first item
-                </Link>
-              </Button>
-            ) : undefined
-          }
+          description="An officer can add segments, speakers and stage cues to build the event sequence."
         />
       ) : (
         <RunOfShowList
           eventId={selectedEventId}
           items={items}
           isOfficer={officer}
-          showAddParam={false}
+          showAddParam={params.new === "1"}
           members={members}
           scripts={scripts}
         />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useCallback } from "react";
+import { useState, useTransition, useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
@@ -86,6 +86,19 @@ export function RunOfShowList({
     });
     setEditing(null);
   }, []);
+
+  // Open the add dialog when the page linked here with ?new=1, then strip
+  // the param so a reload doesn't immediately reopen it.
+  const openedForParam = useRef(false);
+  useEffect(() => {
+    if (!showAddParam || openedForParam.current) return;
+    openedForParam.current = true;
+    resetForm();
+    setOpen(true);
+    const url = new URL(window.location.href);
+    url.searchParams.delete("new");
+    window.history.replaceState(null, "", url.toString());
+  }, [showAddParam, resetForm]);
 
   function openAdd() {
     resetForm();

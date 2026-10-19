@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, CalendarDays, User, Clock } from "lucide-react";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import { isOfficer } from "@/lib/permissions";
+import { isOfficer, canEditScript } from "@/lib/permissions";
 import { formatDate, relativeTime, formatDateTime } from "@/lib/utils";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import {
   ScriptCategoryBadge,
 } from "@/components/domain-badges";
 import { ScriptEditor } from "@/components/script/script-editor";
+import { ScriptContent } from "@/components/script/script-content";
 import { ScriptDiscussion } from "@/components/script/script-discussion";
 import { VersionHistory } from "@/components/script/version-history";
 
@@ -39,6 +40,13 @@ export default async function ScriptDetailPage({
     .maybeSingle();
 
   if (!script) notFound();
+
+  const canEdit = canEditScript({
+    actorRole: user.profile.role,
+    actorId: user.id,
+    createdBy: script.created_by,
+    assignedTo: script.assigned_to,
+  });
 
   const { data: versions } = await supabase
     .from("script_versions")
@@ -119,16 +127,27 @@ export default async function ScriptDetailPage({
       {/* Editor */}
       <Card>
         <CardContent className="pt-6">
-          <ScriptEditor
-            scriptId={script.id}
-            title={script.title}
-            content={script.content}
-            status={script.status}
-            revision={script.revision}
-            updatedAt={script.updated_at}
-            updatedByName={(script as any).last_editor?.full_name ?? null}
-            role={user.profile.role}
-          />
+          {canEdit ? (
+            <ScriptEditor
+              scriptId={script.id}
+              title={script.title}
+              content={script.content}
+              status={script.status}
+              revision={script.revision}
+              updatedAt={script.updated_at}
+              updatedByName={(script as any).last_editor?.full_name ?? null}
+              role={user.profile.role}
+            />
+          ) : (
+            <div className="space-y-4">
+              <p className="rounded-md border border-border bg-secondary/40 px-3 py-2 text-sm text-muted-foreground">
+                You can read this script and join the discussion, but only the
+                Anchoring Officer, a Deputy Anchoring Officer, or an assigned
+                anchor can edit it.
+              </p>
+              <ScriptContent content={script.content} />
+            </div>
+          )}
         </CardContent>
       </Card>
 

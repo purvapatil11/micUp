@@ -12,7 +12,7 @@ function isPublicPath(pathname: string): boolean {
  * Session refresh + coarse route protection. Fine-grained authorization
  * (roles, approvals) is enforced in layouts, server actions and RLS.
  */
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   if (!isSupabaseConfigured()) {
     const url = request.nextUrl.clone();
     url.pathname = "/setup";

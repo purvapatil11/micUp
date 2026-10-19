@@ -7,9 +7,11 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen bg-background">
-      <Sidebar />
+      <div className="print:hidden">
+        <Sidebar />
+      </div>
       <div className="lg:pl-56">
-        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border bg-background/85 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="sticky top-0 z-20 flex h-14 items-center justify-between border-b border-border bg-background/85 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 print:hidden">
           <div className="flex items-center gap-3 lg:hidden">
             <span className="text-sm font-semibold">MicUp</span>
           </div>
@@ -21,8 +23,12 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           </div>
           <UserMenu profile={user.profile} />
         </header>
-        <MobileNav />
-        <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6">{children}</main>
+        <div className="print:hidden">
+          <MobileNav />
+        </div>
+        <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 print:max-w-none print:p-0">
+          {children}
+        </main>
       </div>
     </div>
   );
