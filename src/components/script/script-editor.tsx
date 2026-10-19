@@ -10,7 +10,6 @@ import { Save, AlertTriangle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -56,6 +55,7 @@ export function ScriptEditor({
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dirtyRef = useRef(false);
   const revisionRef = useRef(initialRevision);
+  const editorRef = useRef<any>(null);
 
   const allowedStatuses = allowedStatusTransitions(role as any);
 
@@ -139,10 +139,12 @@ export function ScriptEditor({
     },
   });
 
-  const editorRef = useRef(editor);
-  editorRef.current = editor;
+  useEffect(() => {
+    editorRef.current = editor;
+  }, [editor]);
 
   const handleManualSave = () => {
+    if (!editor) return;
     doSave({ manualNote: note.trim() || null });
     setNote("");
   };

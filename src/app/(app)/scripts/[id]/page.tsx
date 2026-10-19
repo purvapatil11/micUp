@@ -87,9 +87,9 @@ export default async function ScriptDetailPage({
       <div className="mb-6 flex flex-wrap gap-x-6 gap-y-2 rounded-lg border border-border bg-card/60 px-4 py-3 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <CalendarDays className="h-3.5 w-3.5" />
-          {script.events ? (
-            <Link href={`/events/${script.events.id}`} className="hover:text-foreground">
-              {script.events.name} · {formatDate(script.events.event_date)}
+          {(script as any).events ? (
+            <Link href={`/events/${(script as any).events.id}`} className="hover:text-foreground">
+              {(script as any).events.name} · {formatDate((script as any).events.event_date)}
             </Link>
           ) : (
             "No event linked"
@@ -97,12 +97,12 @@ export default async function ScriptDetailPage({
         </span>
         <span className="inline-flex items-center gap-1.5">
           <User className="h-3.5 w-3.5" />
-          Created by {script.creator?.full_name ?? "Unknown"} · {relativeTime(script.created_at)}
+          Created by {(script as any).creator?.full_name ?? "Unknown"} · {relativeTime(script.created_at)}
         </span>
-        {script.last_editor ? (
+        {(script as any).last_editor ? (
           <span className="inline-flex items-center gap-1.5">
             <Clock className="h-3.5 w-3.5" />
-            Last edit by {script.last_editor.full_name} · {relativeTime(script.updated_at)}
+            Last edit by {(script as any).last_editor.full_name} · {relativeTime(script.updated_at)}
           </span>
         ) : null}
         {script.deadline ? (
@@ -126,7 +126,7 @@ export default async function ScriptDetailPage({
             status={script.status}
             revision={script.revision}
             updatedAt={script.updated_at}
-            updatedByName={script.last_editor?.full_name ?? null}
+            updatedByName={(script as any).last_editor?.full_name ?? null}
             role={user.profile.role}
           />
         </CardContent>

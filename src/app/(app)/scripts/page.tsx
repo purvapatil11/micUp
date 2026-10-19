@@ -169,9 +169,9 @@ export default async function ScriptsPage({
                   </div>
                   <div className="flex flex-wrap items-center gap-1.5">
                     <ScriptCategoryBadge category={script.category} />
-                    {script.events ? (
+                    {(script as any).events ? (
                       <Badge variant="outline" className="font-normal">
-                        {script.events.name}
+                        {(script as any).events.name}
                       </Badge>
                     ) : null}
                   </div>
@@ -180,8 +180,8 @@ export default async function ScriptsPage({
                       <p>Deadline: {formatDate(script.deadline)}</p>
                     ) : null}
                     <p>Updated {relativeTime(script.updated_at)}</p>
-                    {script.last_editor ? (
-                      <p>by {script.last_editor.full_name}</p>
+                    {(script as any).last_editor ? (
+                      <p>by {(script as any).last_editor.full_name}</p>
                     ) : null}
                   </div>
                 </CardContent>

@@ -69,7 +69,7 @@ export default async function AnnouncementsPage() {
                         {a.message}
                       </p>
                       <p className="mt-2 text-xs text-muted-foreground">
-                        {a.author?.full_name ?? "Unknown"} · {relativeTime(a.created_at)}
+                        {(a as any).author?.full_name ?? "Unknown"} · {relativeTime(a.created_at)}
                       </p>
                     </div>
                     <div className="flex shrink-0 flex-col items-end gap-2">

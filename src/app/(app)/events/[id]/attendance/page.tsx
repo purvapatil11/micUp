@@ -76,13 +76,13 @@ export default async function AttendancePage({
     const rows = [
       ["Name", "Role", "Status", "Method", "Checked In At", "Distance (m)", "Marked By", "Reason"],
       ...attendance.map((a) => [
-        a.member?.full_name ?? "",
-        (a.member as any)?.role ?? "",
+        (a as any).member?.full_name ?? "",
+        (a as any).member?.role ?? "",
         a.status,
         a.method,
         a.checked_in_at ?? "",
         a.distance_m != null ? String(a.distance_m) : "",
-        (a.marker as any)?.full_name ?? "",
+        (a as any).marker?.full_name ?? "",
         a.reason ?? "",
       ]),
     ];
@@ -200,11 +200,11 @@ export default async function AttendancePage({
                   className="flex items-center justify-between rounded-lg border border-border/60 px-3 py-2 text-sm"
                 >
                   <div>
-                    <p className="font-medium">{a.member?.full_name ?? "Unknown"}</p>
+                    <p className="font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>
                     <p className="text-xs text-muted-foreground">
                       {a.method === "gps" ? "GPS" : "Manual"}
                       {a.checked_in_at ? ` · ${formatDateTime(a.checked_in_at)}` : ""}
-                      {a.marker ? ` · by ${(a.marker as any).full_name}` : ""}
+                      {(a as any).marker ? ` · by ${(a as any).marker.full_name}` : ""}
                     </p>
                   </div>
                   <div className="flex items-center gap-2">

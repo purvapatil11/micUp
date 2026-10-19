@@ -152,14 +152,14 @@ export default async function EventDetailPage({
                   className="flex items-center justify-between rounded-lg border border-border/60 px-3 py-2"
                 >
                   <div>
-                    <p className="text-sm font-medium">{a.member?.full_name ?? "Unknown"}</p>
+                    <p className="text-sm font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>
                     {a.responsibility ? (
                       <p className="text-xs text-muted-foreground">{a.responsibility}</p>
                     ) : null}
                   </div>
-                  {a.member?.role ? (
+                  {(a as any).member?.role ? (
                     <Badge variant="outline" className="text-[10px]">
-                      {a.member.role.replace(/_/g, " ")}
+                      {(a as any).member.role.replace(/_/g, " ")}
                     </Badge>
                   ) : null}
                 </div>
@@ -219,7 +219,7 @@ export default async function EventDetailPage({
                       <p className="text-sm font-medium">{item.segment_title}</p>
                       <p className="text-xs text-muted-foreground">
                         {item.start_time ? formatTime(item.start_time) : ""}
-                        {item.assignee?.full_name ? ` · ${item.assignee.full_name}` : ""}
+                        {(item as any).assignee?.full_name ? ` · ${(item as any).assignee.full_name}` : ""}
                       </p>
                       {item.stage_cue ? (
                         <p className="mt-1 rounded bg-stage-cue/10 px-2 py-1 text-xs text-stage-cue">
@@ -259,7 +259,7 @@ export default async function EventDetailPage({
           <CardContent className="space-y-1.5">
             {attendance.map((a) => (
               <div key={a.id} className="flex items-center justify-between text-sm">
-                <span>{a.member?.full_name ?? "Unknown"}</span>
+                <span>{(a as any).member?.full_name ?? "Unknown"}</span>
                 <span className={a.status === "present" ? "text-success font-medium" : "text-muted-foreground"}>
                   {a.status}
                 </span>

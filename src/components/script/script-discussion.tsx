@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback, useTransition } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { toast } from "sonner";
 import { MessageSquare, Trash2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -34,8 +33,10 @@ export function ScriptDiscussion({
   const [error, setError] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // Merge new incoming props when the server refreshes
+  // Sync state when the server re-renders with fresh data (e.g. after
+  // a mutation + revalidatePath). Realtime handles live inserts/deletes.
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setComments(initialComments);
   }, [initialComments]);
 

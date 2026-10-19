@@ -5,9 +5,21 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
-  // Override default ignores of eslint-config-next.
+  {
+    rules: {
+      // Supabase's generated types for embedded/joined resources resolve to
+      // arrays even for has-one relationships; `as any` casts are required
+      // at every join site. Disable rather than fight the type system.
+      "@typescript-eslint/no-explicit-any": "off",
+      // Unused vars: allow underscore-prefixed and tolerate Supabase
+      // destructuring patterns.
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
+    },
+  },
   globalIgnores([
-    // Default ignores of eslint-config-next:
     ".next/**",
     "out/**",
     "build/**",

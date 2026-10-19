@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { History, RotateCcw, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -89,7 +88,7 @@ export function VersionHistory({
                     {v.author?.full_name ?? "Unknown"} · {formatDateTime(v.created_at)}
                   </p>
                   {v.note ? (
-                    <p className="mt-1 text-xs italic text-muted-foreground">"{v.note}"</p>
+                    <p className="mt-1 text-xs italic text-muted-foreground">&quot;{v.note}&quot;</p>
                   ) : null}
                 </div>
                 <div className="flex shrink-0 items-center gap-1.5">
