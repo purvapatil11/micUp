@@ -17,7 +17,7 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "relative flex flex-col items-center justify-center overflow-hidden rounded-none border-2 border-foreground bg-card px-6 py-14 text-center shadow-[6px_6px_0_hsl(var(--primary))]",
+        "relative flex flex-col items-center justify-center overflow-hidden rounded-none border-2 border-foreground bg-card px-6 pb-12 pt-24 text-center shadow-[6px_6px_0_hsl(var(--primary))]",
         className
       )}
     >
@@ -29,7 +29,7 @@ export function EmptyState({
 
       <div className="relative flex flex-col items-center">
         {icon ? (
-          <div className="mb-3 flex h-11 w-11 items-center justify-center border-2 border-foreground bg-background text-primary">
+          <div className="mb-4 flex h-12 w-12 items-center justify-center border-2 border-foreground bg-background text-primary">
             {icon}
           </div>
         ) : null}
