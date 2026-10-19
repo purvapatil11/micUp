@@ -17,6 +17,7 @@ import { ScriptEditor } from "@/components/script/script-editor";
 import { ScriptContent } from "@/components/script/script-content";
 import { ScriptDiscussion } from "@/components/script/script-discussion";
 import { VersionHistory } from "@/components/script/version-history";
+import { DeleteScriptButton } from "./delete-script-button";
 
 export const metadata = { title: "Script" };
 export const dynamic = "force-dynamic";
@@ -87,6 +88,7 @@ export default async function ScriptDetailPage({
               versions={(versions ?? []) as any}
               isOfficer={officer}
             />
+            {officer ? <DeleteScriptButton scriptId={script.id} /> : null}
           </div>
         }
       />

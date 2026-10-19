@@ -167,3 +167,17 @@ export async function updateAttendanceConfigAction(input: {
     return { ok: false, error: e instanceof Error ? e.message : "Failed to update attendance config." };
   }
 }
+
+export async function deleteEventAction(input: { eventId: string }): Promise<ActionResult> {
+  try {
+    await requireOfficer();
+    const supabase = await createClient();
+    const { error } = await supabase.from("events").delete().eq("id", input.eventId);
+    if (error) return { ok: false, error: error.message };
+    revalidatePath("/events");
+    revalidatePath("/dashboard");
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Failed to delete event." };
+  }
+}
