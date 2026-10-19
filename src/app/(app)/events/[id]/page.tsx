@@ -149,16 +149,16 @@ export default async function EventDetailPage({
               assignments.map((a) => (
                 <div
                   key={a.id}
-                  className="flex items-center justify-between rounded-none border-2 border-foreground px-3 py-2"
+                  className="flex items-center justify-between gap-3 rounded-none border-2 border-foreground px-3 py-2"
                 >
-                  <div>
-                    <p className="text-sm font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>
                     {a.responsibility ? (
-                      <p className="text-xs text-muted-foreground">{a.responsibility}</p>
+                      <p className="truncate text-xs text-muted-foreground">{a.responsibility}</p>
                     ) : null}
                   </div>
                   {(a as any).member?.role ? (
-                    <Badge variant="outline" className="text-[10px]">
+                    <Badge variant="outline" className="shrink-0 text-[10px]">
                       {(a as any).member.role.replace(/_/g, " ")}
                     </Badge>
                   ) : null}

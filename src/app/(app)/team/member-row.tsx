@@ -67,7 +67,7 @@ export function MemberRow({
   }
 
   return (
-    <div className="flex items-center justify-between gap-3 rounded-none border-2 border-foreground px-4 py-3">
+    <div className="flex flex-col gap-3 rounded-none border-2 border-foreground px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex min-w-0 items-center gap-3">
         <Avatar className="h-9 w-9">
           <AvatarImage src={member.avatar_url ?? undefined} alt="" />
@@ -82,7 +82,7 @@ export function MemberRow({
         </div>
       </div>
 
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 sm:shrink-0 sm:justify-end">
         <Badge>{ROLE_LABELS[member.role]}</Badge>
         {member.status === "suspended" ? (
           <Badge variant="destructive">Suspended</Badge>

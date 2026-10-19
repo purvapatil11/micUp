@@ -189,19 +189,19 @@ export default async function AttendancePage({
               {attendance.map((a) => (
                 <div
                   key={a.id}
-                  className="flex items-center justify-between rounded-none border-2 border-foreground px-3 py-2 text-sm"
+                  className="flex flex-col gap-1.5 rounded-none border-2 border-foreground px-3 py-2 text-sm sm:flex-row sm:items-center sm:justify-between"
                 >
-                  <div>
-                    <p className="font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>
-                    <p className="text-xs text-muted-foreground">
+                  <div className="min-w-0">
+                    <p className="truncate font-medium">{(a as any).member?.full_name ?? "Unknown"}</p>
+                    <p className="truncate text-xs text-muted-foreground">
                       {a.method === "gps" ? "GPS" : "Manual"}
                       {a.checked_in_at ? ` · ${formatDateTime(a.checked_in_at)}` : ""}
                       {(a as any).marker ? ` · by ${(a as any).marker.full_name}` : ""}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                     {a.reason ? (
-                      <span className="max-w-[200px] truncate text-xs text-muted-foreground" title={a.reason}>
+                      <span className="max-w-full truncate text-xs text-muted-foreground sm:max-w-[200px]" title={a.reason}>
                         {a.reason}
                       </span>
                     ) : null}
@@ -232,8 +232,8 @@ export default async function AttendancePage({
           <CardContent>
             <div className="space-y-1">
               {auditLog.map((log) => (
-                <div key={log.id} className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span>
+                <div key={log.id} className="flex flex-col gap-0.5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+                  <span className="min-w-0">
                     {(log.member as any)?.full_name ?? "Unknown"} · {log.action} · {log.outcome.replace(/_/g, " ")}
                     {log.actor ? ` · by ${(log.actor as any).full_name}` : ""}
                   </span>
