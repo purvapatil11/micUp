@@ -43,7 +43,7 @@ describe("createScriptSchema", () => {
 describe("saveScriptSchema", () => {
   it("accepts a valid save payload", () => {
     const result = saveScriptSchema.safeParse({
-      scriptId: "aaaaaaaa-0000-0000-0000-000000000001",
+      scriptId: "aaaaaaaa-0000-4000-8000-000000000001",
       baseRevision: 3,
       title: "Updated title",
       content: { type: "doc", content: [] },
@@ -54,7 +54,7 @@ describe("saveScriptSchema", () => {
 
   it("rejects a non-positive base revision", () => {
     const result = saveScriptSchema.safeParse({
-      scriptId: "aaaaaaaa-0000-0000-0000-000000000001",
+      scriptId: "aaaaaaaa-0000-4000-8000-000000000001",
       baseRevision: 0,
       title: "Updated title",
       content: null,
@@ -65,7 +65,7 @@ describe("saveScriptSchema", () => {
 
   it("rejects an invalid status", () => {
     const result = saveScriptSchema.safeParse({
-      scriptId: "aaaaaaaa-0000-0000-0000-000000000001",
+      scriptId: "aaaaaaaa-0000-4000-8000-000000000001",
       baseRevision: 1,
       title: "Test",
       content: null,
@@ -78,7 +78,7 @@ describe("saveScriptSchema", () => {
 describe("createCommentSchema", () => {
   it("accepts a valid comment", () => {
     const result = createCommentSchema.safeParse({
-      scriptId: "aaaaaaaa-0000-0000-0000-000000000001",
+      scriptId: "aaaaaaaa-0000-4000-8000-000000000001",
       body: "Great opening line!",
     });
     expect(result.success).toBe(true);
@@ -86,7 +86,7 @@ describe("createCommentSchema", () => {
 
   it("rejects an empty comment", () => {
     const result = createCommentSchema.safeParse({
-      scriptId: "aaaaaaaa-0000-0000-0000-000000000001",
+      scriptId: "aaaaaaaa-0000-4000-8000-000000000001",
       body: "   ",
     });
     expect(result.success).toBe(false);
@@ -94,7 +94,7 @@ describe("createCommentSchema", () => {
 
   it("rejects a comment over 4000 characters", () => {
     const result = createCommentSchema.safeParse({
-      scriptId: "aaaaaaaa-0000-0000-0000-000000000001",
+      scriptId: "aaaaaaaa-0000-4000-8000-000000000001",
       body: "x".repeat(4001),
     });
     expect(result.success).toBe(false);
@@ -104,7 +104,7 @@ describe("createCommentSchema", () => {
 describe("checkInSchema", () => {
   it("accepts valid coordinates", () => {
     const result = checkInSchema.safeParse({
-      eventId: "aaaaaaaa-0000-0000-0000-000000000001",
+      eventId: "aaaaaaaa-0000-4000-8000-000000000001",
       latitude: 28.6139,
       longitude: 77.209,
     });
@@ -113,7 +113,7 @@ describe("checkInSchema", () => {
 
   it("rejects out-of-range latitude", () => {
     const result = checkInSchema.safeParse({
-      eventId: "aaaaaaaa-0000-0000-0000-000000000001",
+      eventId: "aaaaaaaa-0000-4000-8000-000000000001",
       latitude: 95,
       longitude: 77.209,
     });
@@ -122,7 +122,7 @@ describe("checkInSchema", () => {
 
   it("rejects out-of-range longitude", () => {
     const result = checkInSchema.safeParse({
-      eventId: "aaaaaaaa-0000-0000-0000-000000000001",
+      eventId: "aaaaaaaa-0000-4000-8000-000000000001",
       latitude: 28.6,
       longitude: 185,
     });
@@ -133,8 +133,8 @@ describe("checkInSchema", () => {
 describe("correctAttendanceSchema", () => {
   it("accepts a valid correction", () => {
     const result = correctAttendanceSchema.safeParse({
-      eventId: "aaaaaaaa-0000-0000-0000-000000000001",
-      profileId: "bbbbbbbb-0000-0000-0000-000000000001",
+      eventId: "aaaaaaaa-0000-4000-8000-000000000001",
+      profileId: "bbbbbbbb-0000-4000-8000-000000000001",
       status: "present",
       reason: "GPS unavailable at venue",
     });
@@ -143,8 +143,8 @@ describe("correctAttendanceSchema", () => {
 
   it("rejects a reason shorter than 3 characters", () => {
     const result = correctAttendanceSchema.safeParse({
-      eventId: "aaaaaaaa-0000-0000-0000-000000000001",
-      profileId: "bbbbbbbb-0000-0000-0000-000000000001",
+      eventId: "aaaaaaaa-0000-4000-8000-000000000001",
+      profileId: "bbbbbbbb-0000-4000-8000-000000000001",
       status: "present",
       reason: "ok",
     });
@@ -153,8 +153,8 @@ describe("correctAttendanceSchema", () => {
 
   it("rejects an invalid status", () => {
     const result = correctAttendanceSchema.safeParse({
-      eventId: "aaaaaaaa-0000-0000-0000-000000000001",
-      profileId: "bbbbbbbb-0000-0000-0000-000000000001",
+      eventId: "aaaaaaaa-0000-4000-8000-000000000001",
+      profileId: "bbbbbbbb-0000-4000-8000-000000000001",
       status: "maybe",
       reason: "Legit reason here",
     });
