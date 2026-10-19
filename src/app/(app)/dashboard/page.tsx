@@ -1,9 +1,7 @@
 import Link from "next/link";
 import {
   CalendarDays,
-  FileText,
   Megaphone,
-  MessageSquare,
   ClipboardCheck,
   Plus,
   Radio,
@@ -185,9 +183,8 @@ export default async function DashboardPage() {
       <div className="grid gap-4 lg:grid-cols-3">
         {/* Upcoming events */}
         <Card>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+          <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Upcoming events</CardTitle>
-            <CalendarDays className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="space-y-2">
             {upcomingEvents.length === 0 ? (
@@ -216,9 +213,8 @@ export default async function DashboardPage() {
 
         {/* My scripts */}
         <Card>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+          <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Scripts assigned to you</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="space-y-2">
             {myScripts.length === 0 ? (
@@ -248,11 +244,10 @@ export default async function DashboardPage() {
 
         {/* Needs review */}
         <Card>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+          <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">
               {officer ? "Waiting for your review" : "Needs review"}
             </CardTitle>
-            <ClipboardCheck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="space-y-2">
             {reviewScripts.length === 0 ? (
@@ -309,9 +304,8 @@ export default async function DashboardPage() {
 
         {/* Recent discussions */}
         <Card>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+          <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Recent script discussions</CardTitle>
-            <MessageSquare className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="space-y-2.5">
             {recentComments.length === 0 ? (
@@ -338,9 +332,8 @@ export default async function DashboardPage() {
 
         {/* Announcements */}
         <Card>
-          <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
+          <CardHeader className="pb-2">
             <CardTitle className="text-sm font-semibold">Announcements</CardTitle>
-            <Megaphone className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent className="space-y-2.5">
             {announcements.length === 0 ? (

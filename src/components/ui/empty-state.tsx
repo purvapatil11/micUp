@@ -1,5 +1,4 @@
 import * as React from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function EmptyState({
@@ -26,15 +25,6 @@ export function EmptyState({
       <div
         aria-hidden
         className="tf-art pointer-events-none absolute inset-x-0 top-0 h-20 border-b-2 border-foreground"
-      />
-      {/* Astronaut drifting in the corner */}
-      <Image
-        src="/techfiesta/astronaut.webp"
-        alt=""
-        aria-hidden
-        width={983}
-        height={1277}
-        className="pointer-events-none absolute bottom-1 right-2 w-12 select-none opacity-90 sm:w-16"
       />
 
       <div className="relative">

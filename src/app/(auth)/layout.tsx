@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Sign in" };
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="tf-scope relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background px-4 py-10">
-      {/* Halftone dot band across the top (TechFiesta seam graphic) */}
+      {/* Halftone dot band across the top */}
       <Image
         src="/techfiesta/dot-overlay.png"
         alt=""
@@ -16,15 +16,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         height={744}
         className="pointer-events-none absolute inset-x-0 top-0 h-32 w-full select-none object-cover opacity-80 sm:h-44"
         priority
-      />
-      {/* Astronaut floating in the corner */}
-      <Image
-        src="/techfiesta/astronaut.webp"
-        alt=""
-        aria-hidden
-        width={983}
-        height={1277}
-        className="pointer-events-none absolute bottom-0 right-0 w-24 translate-y-4 select-none sm:w-36 md:w-44"
       />
 
       <div className="relative z-10 w-full max-w-sm">
