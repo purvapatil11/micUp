@@ -2,59 +2,58 @@
 @import "./tf.css";
 
 /*
- * MicUp design tokens — light neobrutalist theme.
+ * MicUp design tokens — TechFiesta light theme (matched to ioit-tenet /techfiesta).
  * White canvas, navy #050530 ink/borders, electric-blue #0000c8 accent,
- * periwinkle #cfd5ff highlights. Tokens are full hsl() colors so every
- * Tailwind utility and raw var() usage resolves to a valid color.
+ * periwinkle #cfd5ff highlights. HSL triplets, no color function wrapper.
  */
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(240 81% 26%);
+  --background: 0 0% 100%;
+  --foreground: 240 81% 26%;
 
-  --card: hsl(0 0% 100%);
-  --card-foreground: hsl(240 81% 26%);
-  --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(240 81% 26%);
+  --card: 0 0% 100%;
+  --card-foreground: 240 81% 26%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 81% 26%;
 
-  --primary: hsl(240 100% 39%);
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: 240 100% 39%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: hsl(233 100% 91%);
-  --secondary-foreground: hsl(240 81% 26%);
+  --secondary: 233 100% 91%;
+  --secondary-foreground: 240 81% 26%;
 
-  --muted: hsl(233 100% 96%);
-  --muted-foreground: hsl(233 38% 42%);
+  --muted: 233 100% 96%;
+  --muted-foreground: 233 38% 42%;
 
-  --accent: hsl(233 100% 91%);
-  --accent-foreground: hsl(240 81% 26%);
+  --accent: 233 100% 91%;
+  --accent-foreground: 240 81% 26%;
 
-  --destructive: hsl(0 72% 50%);
-  --destructive-foreground: hsl(0 0% 100%);
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 0 0% 100%;
 
-  --success: hsl(152 55% 32%);
-  --success-foreground: hsl(0 0% 100%);
+  --success: 152 55% 32%;
+  --success-foreground: 0 0% 100%;
 
-  --warning: hsl(38 92% 45%);
-  --warning-foreground: hsl(240 8% 6%);
+  --warning: 38 92% 45%;
+  --warning-foreground: 240 8% 6%;
 
-  --info: hsl(240 100% 39%);
-  --info-foreground: hsl(0 0% 100%);
+  --info: 240 100% 39%;
+  --info-foreground: 0 0% 100%;
 
-  --border: hsl(233 60% 86%);
-  --input: hsl(240 81% 26%);
-  --ring: hsl(240 100% 39%);
+  --border: 233 60% 86%;
+  --input: 240 81% 26%;
+  --ring: 240 100% 39%;
 
   --radius: 0.125rem;
 
-  --sidebar: hsl(0 0% 100%);
-  --sidebar-foreground: hsl(240 81% 26%);
-  --sidebar-accent: hsl(233 100% 91%);
-  --sidebar-border: hsl(240 81% 26%);
-  --sidebar-ring: hsl(240 100% 39%);
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 240 81% 26%;
+  --sidebar-accent: 233 100% 91%;
+  --sidebar-border: 240 81% 26%;
+  --sidebar-ring: 240 100% 39%;
 
-  --stage-cue: hsl(262 75% 45%);
-  --stage-cue-foreground: hsl(0 0% 100%);
+  --stage-cue: 262 75% 45%;
+  --stage-cue-foreground: 0 0% 100%;
 }
 
 @theme inline {

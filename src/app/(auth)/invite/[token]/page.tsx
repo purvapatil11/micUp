@@ -60,7 +60,7 @@ export default async function InvitePage({
 
 function CardShell({ title, description }: { title: string; description: string }) {
   return (
-    <div className="rounded-none border-2 border-foreground bg-card p-6 text-center shadow-[6px_6px_0_var(--primary)]">
+    <div className="rounded-none border-2 border-foreground bg-card p-6 text-center shadow-[6px_6px_0_hsl(var(--primary))]">
       <h1 className="font-display text-lg font-semibold">{title}</h1>
       <p className="mt-2 text-sm text-muted-foreground">{description}</p>
     </div>
