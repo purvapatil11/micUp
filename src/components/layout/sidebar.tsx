@@ -42,7 +42,7 @@ export function Sidebar({ pendingAnnouncementsPath }: { pendingAnnouncementsPath
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-56 flex-col border-r-[3px] border-foreground bg-sidebar lg:flex">
       <div className="flex h-14 items-center border-b-[3px] border-foreground px-4">
         <Link href="/dashboard">
-          <MicUpLogo size={32} />
+          <MicUpLogo size={38} />
         </Link>
       </div>
 
