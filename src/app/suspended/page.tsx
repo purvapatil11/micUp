@@ -35,7 +35,7 @@ export default async function SuspendedPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
         <div className="mb-8 flex justify-center">
-          <MicUpLogo size={36} />
+          <MicUpLogo size={44} />
         </div>
         <Card>
           <CardHeader>

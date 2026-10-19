@@ -11,7 +11,7 @@ export function MicUpLogo({
   size?: number;
 }) {
   return (
-    <span className={cn("inline-flex items-center gap-2", className)}>
+    <span className={cn("inline-flex items-center gap-2.5", className)}>
       <span
         className="relative flex items-center justify-center rounded-none bg-primary text-primary-foreground"
         style={{ width: size, height: size }}
@@ -32,7 +32,7 @@ export function MicUpLogo({
           <path d="M12 18v4" />
         </svg>
       </span>
-      <span className="font-display text-lg font-bold tracking-tight">
+      <span className="font-display text-xl font-bold tracking-tight">
         Mic<span className="text-primary">Up</span>
       </span>
     </span>
