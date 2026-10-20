@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,7 @@ export function ManualCorrectionDialog({
   const [reason, setReason] = useState("");
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   function handleSubmit() {
     if (!profileId) {
@@ -65,7 +67,7 @@ export function ManualCorrectionDialog({
       setProfileId("");
       setStatus("present");
       setReason("");
-      window.location.reload();
+      router.refresh();
     });
   }
 

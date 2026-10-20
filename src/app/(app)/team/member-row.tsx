@@ -1,6 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Trash2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -33,6 +34,7 @@ export function MemberRow({
 }) {
   const [pending, startTransition] = useTransition();
   const isSelf = member.id === currentUserId;
+  const router = useRouter();
 
   function changeRole(role: Role) {
     startTransition(async () => {
@@ -46,7 +48,7 @@ export function MemberRow({
         return;
       }
       toast.success("Role updated");
-      window.location.reload();
+      router.refresh();
     });
   }
 
@@ -63,7 +65,7 @@ export function MemberRow({
         return;
       }
       toast.success(next === "suspended" ? "Member suspended" : "Member reactivated");
-      window.location.reload();
+      router.refresh();
     });
   }
 
@@ -82,7 +84,7 @@ export function MemberRow({
         return;
       }
       toast.success("Member deleted");
-      window.location.reload();
+      router.refresh();
     });
   }
 

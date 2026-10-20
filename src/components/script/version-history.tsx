@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { History, RotateCcw, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,6 +41,7 @@ export function VersionHistory({
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Version | null>(null);
   const [pending, startTransition] = useTransition();
+  const router = useRouter();
 
   function handleRestore(versionId: string) {
     startTransition(async () => {
@@ -51,7 +53,7 @@ export function VersionHistory({
       toast.success("Version restored as a new revision");
       setOpen(false);
       setSelected(null);
-      window.location.reload();
+      router.refresh();
     });
   }
 
