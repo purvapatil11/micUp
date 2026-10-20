@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,7 @@ export function AttendanceConfigForm({
   const [closesAt, setClosesAt] = useState(initialCloses ? toLocalInput(initialCloses) : "");
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   function toLocalInput(iso: string): string {
     const d = new Date(iso);
@@ -85,7 +87,7 @@ export function AttendanceConfigForm({
         return;
       }
       toast.success("Attendance configuration saved");
-      window.location.reload();
+      router.refresh();
     });
   }
 

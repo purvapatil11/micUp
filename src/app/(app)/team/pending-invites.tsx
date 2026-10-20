@@ -1,6 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Mail, X, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,7 @@ interface Invite {
 
 export function PendingInvites({ invites }: { invites: Invite[] }) {
   const [pending, startTransition] = useTransition();
+  const router = useRouter();
 
   function handleRevoke(inviteId: string) {
     if (!confirm("Revoke this invite?")) return;
@@ -31,7 +33,7 @@ export function PendingInvites({ invites }: { invites: Invite[] }) {
         return;
       }
       toast.success("Invite revoked");
-      window.location.reload();
+      router.refresh();
     });
   }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ export function PublishAnnouncementDialog() {
   const [priority, setPriority] = useState<string>("normal");
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   function handlePublish() {
     if (!title.trim() || !message.trim()) {
@@ -53,7 +55,7 @@ export function PublishAnnouncementDialog() {
       setTitle("");
       setMessage("");
       setPriority("normal");
-      window.location.reload();
+      router.refresh();
     });
   }
 

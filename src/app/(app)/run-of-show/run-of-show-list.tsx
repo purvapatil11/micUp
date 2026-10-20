@@ -143,7 +143,7 @@ export function RunOfShowList({
       toast.success(editing ? "Item updated" : "Item added");
       setOpen(false);
       resetForm();
-      window.location.reload();
+      router.refresh();
     });
   }
 

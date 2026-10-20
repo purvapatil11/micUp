@@ -1,6 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Trash2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,7 @@ import { deleteAnnouncementAction } from "@/actions/announcements";
 
 export function DeleteAnnouncementButton({ announcementId }: { announcementId: string }) {
   const [pending, startTransition] = useTransition();
+  const router = useRouter();
 
   function handleDelete() {
     if (!confirm("Delete this announcement?")) return;
@@ -18,7 +20,7 @@ export function DeleteAnnouncementButton({ announcementId }: { announcementId: s
         return;
       }
       toast.success("Announcement deleted");
-      window.location.reload();
+      router.refresh();
     });
   }
 

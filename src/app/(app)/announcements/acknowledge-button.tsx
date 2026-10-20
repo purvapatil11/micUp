@@ -1,6 +1,7 @@
 "use client";
 
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +9,7 @@ import { acknowledgeAnnouncementAction } from "@/actions/announcements";
 
 export function AcknowledgeButton({ announcementId }: { announcementId: string }) {
   const [pending, startTransition] = useTransition();
+  const router = useRouter();
 
   function handleAck() {
     startTransition(async () => {
@@ -17,7 +19,7 @@ export function AcknowledgeButton({ announcementId }: { announcementId: string }
         return;
       }
       toast.success("Acknowledged");
-      window.location.reload();
+      router.refresh();
     });
   }
 
