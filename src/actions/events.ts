@@ -40,6 +40,7 @@ export async function createEventAction(input: {
         venue: parsed.data.venue,
         status: parsed.data.status,
         notes: parsed.data.notes,
+        created_by: user.id,
       })
       .select("id")
       .single();
