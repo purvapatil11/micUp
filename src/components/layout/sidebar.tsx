@@ -102,7 +102,7 @@ export function MobileNav() {
   const items = NAV_SECTIONS.flatMap((s) => s.items);
 
   return (
-    <nav className="sticky top-14 z-10 flex gap-1 overflow-x-auto border-b-[3px] border-foreground bg-[hsl(var(--sidebar))] px-3 py-2 lg:hidden">
+    <nav className="sticky top-14 z-10 flex gap-1 overflow-x-auto rounded-none border-b-[3px] border-foreground bg-white px-3 py-2 lg:hidden">
       {items.map((item) => {
         const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
         return (
