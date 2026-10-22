@@ -114,14 +114,21 @@ body {
   font-feature-settings: "cv02", "cv03", "cv04";
 }
 
+/*
+ * Selection highlight. The tokens are bare HSL triplets, so they only
+ * resolve inside an hsl() wrapper — a bare `var(--primary)` is not a valid
+ * color and would silently fall back to transparent, making every selection
+ * (select a word, Ctrl+A, drag) invisible.
+ */
 ::selection {
-  background: color-mix(in srgb, var(--primary) 32%, transparent);
+  background: hsl(var(--primary) / 32%);
+  color: hsl(var(--foreground));
 }
 
 /* Thin scrollbars to match the control-room feel */
 * {
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--foreground) 14%, transparent) transparent;
+  scrollbar-color: hsl(var(--foreground) / 14%) transparent;
 }
 
 /* ---------- Rich-text editor (TipTap) ---------- */
